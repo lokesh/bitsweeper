@@ -15,6 +15,10 @@ export default {
   
   props: {
     msg: String
+  },
+
+  created() {
+     this.$store.dispatch('resetGame');
   }
 }
 </script>

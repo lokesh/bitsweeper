@@ -35,8 +35,15 @@ export default {
   align-items: center;
   width: var(--block-size);
   height: var(--block-size);
-  background: #444;
-  border: 1px solid #fff;
+  background: var(--color-bg);
+  border: 1px solid var(--color);
+  font-weight: bold;
+  user-select: none;
+  cursor: pointer;
+}
+
+.block:hover {
+  background: #666;
 }
 
 .block:focus {

@@ -32,9 +32,16 @@ export default {
 
   computed: {
     ...mapState([
-      'rows',
-      'cols',
+      'field',
     ]),
+
+    rows() {
+      return this.field.length;
+    },
+
+    cols() {
+      return this.field[0].length;
+    },
 
     fieldStyles() {
       return {
