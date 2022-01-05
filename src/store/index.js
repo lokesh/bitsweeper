@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
-import Block from '../classes/Block';
+import { STATE_ACTIVE, STATE_READY } from '@/utils/constants';
+import Block from '@/classes/Block';
 
 export default createStore({
   state: {
@@ -8,10 +9,18 @@ export default createStore({
     mines: 20,
     field: [],
     difficulty: null,
+
+    gameState: STATE_READY,
   },
   mutations: {
-    addMinesToField() {
-
+    addMinesToField(state) {
+      console.log('add Mines');
+      let minesAdded = 0;
+      
+      while (minesAdded < state.mines) {
+        minesAdded++;
+        console.log(minesAdded);
+      }
     },
 
     setDifficulty() {
@@ -21,6 +30,10 @@ export default createStore({
     setField(state, val) {
       state.field = val;
     },
+
+    setGameState(state, val) {
+      state.gameState = val;
+    }
   },
   actions: {
     resetGame({ state, commit }) {
@@ -34,16 +47,14 @@ export default createStore({
       }
 
       commit('setField', field);
-      // console.log(field);
 
       // Reset timer
     },
 
-    startGame() {
-      // Add mines to field
+    startGame({ commit }) {
+      commit('addMinesToField');
+      commit('setGameState', STATE_ACTIVE);
     },
 
   },
-  modules: {
-  }
 })

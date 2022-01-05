@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Field</h1>
     <div
       class="field"
       :style="fieldStyles"
@@ -17,10 +16,10 @@
 
 <script>
 import { mapState } from 'vuex';
-import Block from './Block';
+import Block from '@/components/Block';
 
 export default {
-  name: 'Field',
+  name: 'MineField',
   
   components: {
     Block,

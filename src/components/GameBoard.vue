@@ -1,16 +1,19 @@
 <template>
   <div>
-    <field />
+    <score-board />
+    <mine-field />
   </div>
 </template>
 
 <script>
-import Field from './Field';
+import MineField from '@/components/MineField';
+import ScoreBoard from '@/components/ScoreBoard';
 
 export default {
-  name: 'HelloWorld',
+  name: 'GameBoard',
   components: {
-    Field,
+    MineField,
+    ScoreBoard,
   },
   
   props: {

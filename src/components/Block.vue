@@ -8,21 +8,33 @@
       @keyup.enter="onClick"
       @keyup.space.prevent="onClick"
     >
-      1
+      X
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import { STATE_READY } from '@/utils/constants';
+
 export default {
   name: 'Block',
   props: {
     msg: String
   },
 
+  computed: {
+    ...mapState([
+      'gameState',
+    ]),
+  },
+
   methods: {
     onClick() {
       console.log('clack');
+      if (this.gameState === STATE_READY) {
+        this.$store.dispatch('startGame');
+      }
     },
   }
 }
