@@ -1,4 +1,4 @@
-# minesweeper
+# Bitsweeper
 
 ## Project setup
 ```
