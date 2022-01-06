@@ -1,5 +1,7 @@
 <template>
   <div class="score-board">
+    {{ gameState }}
+    ...
     Mines {{ mines }}
     ...
     Timer 00:00
@@ -17,6 +19,7 @@ export default {
   computed: {
     ...mapState([
       'mines',
+      'gameState',
     ]),
   }
 }

@@ -1,5 +1,15 @@
 # Bitsweeper
 
+## To-do
+- [ ] Support tap
+- [ ] Support long press and right click for flagging
+
+---
+- [ ] Turn eslint on save back on by updating vue.config.js?
+
+
+
+
 ## Project setup
 ```
 npm install

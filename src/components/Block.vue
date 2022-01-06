@@ -2,16 +2,22 @@
   <div>
     <div
       class="block"
+      :class="{ 'is-open': block.isOpen }"
       aria-role="button"
       tabindex="0"
-      @click="onClick"
+      @click.exact="onClick"
+      @click.shift="onShiftClick"
       @keyup.enter="onClick"
       @keyup.space.prevent="onClick"
     >
-      {{ block.row }}
-      {{ block.col }}
-      <!-- {{ block.neighborMinesCount }}
-      {{ block.hasMine ? 'X' : '0' }} -->
+      <!-- {{ block.row }}
+      {{ block.col }} -->
+      <div v-if="block.isOpen">
+        {{ label }}
+      </div>
+      <div v-else-if="block.flagged">
+        ⛳️
+      </div>
     </div>
   </div>
 </template>
@@ -19,7 +25,6 @@
 <script>
 import { mapState } from 'vuex';
 import { STATE_READY } from '@/utils/constants';
-import { getNeighbors } from '@/utils/index';
 
 export default {
   name: 'Block',
@@ -38,24 +43,31 @@ export default {
   computed: {
     ...mapState([
       'cols',
+      'field',
       'gameState',
       'rows',
     ]),
-  },
 
-  updated() {
-    console.log('Block:updated');
+    label() {
+      if (this.block.hasMine) {
+        return  '💣';
+      } else if (this.block.neighborMinesCount > 0) {
+        return this.block.neighborMinesCount;
+      }
+    },
   },
 
   methods: {
     onClick() {
-      // console.log(this.block.row);
-      getNeighbors(this.block.row, this.block.col, this.rows, this.cols);
-
       if (this.gameState === STATE_READY) {
+        this.$store.commit('setBlockToOpen', this.block);
         this.$store.dispatch('startGame');
       }
-
+      this.$store.dispatch('openBlock', this.block);
+    },
+    
+    onShiftClick() {
+      this.$store.commit('setFlag', this.block);
     },
   }
 }
@@ -73,13 +85,18 @@ export default {
   font-weight: bold;
   user-select: none;
   cursor: pointer;
+  font-size: 24px;
 }
 
-.block:hover {
+.block.is-open {
+  background: #fff;
+}
+
+/*.block:hover {
   background: #666;
 }
 
 .block:focus {
   background: #999;
-}
+}*/
 </style>
