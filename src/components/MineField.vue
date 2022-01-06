@@ -5,11 +5,10 @@
       :style="fieldStyles"
     >
       <block
-        v-for="i in (rows * cols)"
+        v-for="(block, i) in blocks"
         :key="i"
-      >
-        {{ i }}
-      </block>
+        :block="block"
+      />
     </div>
   </div>
 </template>
@@ -40,6 +39,16 @@ export default {
 
     cols() {
       return this.field[0].length;
+    },
+
+    blocks() {
+      let blocks = [];
+      this.field.forEach(row => {
+        row.forEach(block => {
+          blocks.push(block);
+        })
+      })
+      return blocks;
     },
 
     fieldStyles() {

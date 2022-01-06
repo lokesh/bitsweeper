@@ -8,7 +8,10 @@
       @keyup.enter="onClick"
       @keyup.space.prevent="onClick"
     >
-      X
+      {{ block.row }}
+      {{ block.col }}
+      <!-- {{ block.neighborMinesCount }}
+      {{ block.hasMine ? 'X' : '0' }} -->
     </div>
   </div>
 </template>
@@ -16,25 +19,43 @@
 <script>
 import { mapState } from 'vuex';
 import { STATE_READY } from '@/utils/constants';
+import { getNeighbors } from '@/utils/index';
 
 export default {
   name: 'Block',
+
   props: {
-    msg: String
+    /**
+     * Instane of class from Block.js
+     * @type {Object}
+     */
+    block: {
+      type: Object,
+      required: true,
+    },
   },
 
   computed: {
     ...mapState([
+      'cols',
       'gameState',
+      'rows',
     ]),
+  },
+
+  updated() {
+    console.log('Block:updated');
   },
 
   methods: {
     onClick() {
-      console.log('clack');
+      // console.log(this.block.row);
+      getNeighbors(this.block.row, this.block.col, this.rows, this.cols);
+
       if (this.gameState === STATE_READY) {
         this.$store.dispatch('startGame');
       }
+
     },
   }
 }

@@ -14,13 +14,29 @@ export default createStore({
   },
   mutations: {
     addMinesToField(state) {
-      console.log('add Mines');
+      // Add mines
       let minesAdded = 0;
       
       while (minesAdded < state.mines) {
-        minesAdded++;
-        console.log(minesAdded);
+        let row = Math.floor(Math.random() * 10);
+        let col = Math.floor(Math.random() * 10);
+        let randBlock = state.field[row][col];
+        if (!randBlock.isOpen && ~randBlock.hasMine) {
+          state.field[row][col].hasMine = true;
+          minesAdded++;  
+        }
       }
+
+      // Update neighborMinesCount
+      console.log('update count');
+
+      // for (let i = 0; i < state.rows; i++) {
+      //   field[i] = [];
+      //   for (let j = 0; j < state.cols; j++) {
+      //     field[i].push(new Block());
+      //   }
+      // }
+
     },
 
     setDifficulty() {
@@ -42,7 +58,7 @@ export default createStore({
       for (let i = 0; i < state.rows; i++) {
         field[i] = [];
         for (let j = 0; j < state.cols; j++) {
-          field[i].push(new Block());
+          field[i].push(new Block(i, j));
         }
       }
 

@@ -1,8 +1,11 @@
 export default class Block {
-  constructor() {
-    this.neighbourMinesCount = 0;
+  constructor(row, col) {
+    this.row = row;
+    this.col = col;
+
+    this.neighborMinesCount = 0;
     this.hasMine = false;
-    this.mined = false;
+    this.isOpen = false;
     this.flagged = false;
   }
 }

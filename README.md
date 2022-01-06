@@ -24,22 +24,10 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
-
-Data structure
-
-class Square {
-  neighbourMinesCount: Number;
-  hasMine: False,
-  mined: False;
-  flagged: False;
-}
-
-bomb
-flag
-\
-
-
 Design inspo:
 
 https://play.google.com/store/apps/details?id=com.gagonfe.onebitsweeper&hl=en_US&gl=US
 Same name!!! boo
+
+
+Add cheat code: XYZZY shift + enter
