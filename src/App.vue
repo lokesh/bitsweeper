@@ -12,6 +12,12 @@ export default {
   components: {
     GameBoard,
   },
+
+  mounted() {
+    document.addEventListener('contextmenu', function(e){
+        e.preventDefault();
+    }, false);
+  },
 }
 </script>
 

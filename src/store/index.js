@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import { STATE_ACTIVE, STATE_LOST, STATE_READY } from '@/utils/constants';
-import { getNeighbors, getNeighborsRowCol } from '@/utils/index';
+import { getNeighbors } from '@/utils/index';
 import Block from '@/classes/Block';
 
 export default createStore({
@@ -8,12 +8,17 @@ export default createStore({
     rows: 10,
     cols: 15,
     mines: 20,
+    flags: 0,
     field: [],
     difficulty: null,
 
     gameState: STATE_READY,
   },
   mutations: {
+    addFlag(state, val) {
+      state.field[val.row][val.col].flagged = true;
+    },
+
     addMinesToField(state) {
       // Add mines
       let minesAdded = 0;
@@ -40,6 +45,14 @@ export default createStore({
       }
     },
 
+    decrementFlagCount(state) {
+      state.flags--;
+    },
+
+    incrementFlagCount(state) {
+      state.flags++;
+    },
+
     setBlockToOpen(state, val) {
       state.field[val.row][val.col].isOpen = true;
     },
@@ -52,11 +65,14 @@ export default createStore({
       state.field = val;
     },
 
-    setFlag(state, val) {
-      if (val.isOpen) return;
-
-      state.field[val.row][val.col].flagged = true;
+    removeFlag(state, val) {
+      state.field[val.row][val.col].flagged = false;
     },
+
+    setFlagCount(state, val) {
+      state.flags = val;
+    },
+
     setGameState(state, val) {
       state.gameState = val;
     }
@@ -66,7 +82,7 @@ export default createStore({
       commit('setGameState', STATE_LOST);
     },
 
-    openBlock({ state, commit, dispatch }, block) {
+    openBlock({ state, dispatch }, block) {
       const { row, col, hasMine } = block;
       state.field[row][col].isOpen = true;
 
@@ -82,17 +98,13 @@ export default createStore({
       }
 
       let neighbors = getNeighbors(block.row, block.col, state.field);
-      // Expand outward
-      // Add neighbors to stack, if any have 0 neighborMinesCount, then add
-      // their neigbhors to stack
-      // let neighborsRowCols = getNeighborsRowCol(row, col, state.rows, state.cols);
-      // console.log(neighborsRowCols);
-      // console.log(neighbors.length);
 
+      /*
+        Expand outward. If neighbor has a 0 neighborsMinesCount than add it's
+        neighbors to stack.
+       */
       while (neighbors.length > 0) {
-        // console.log(neighbors.length);
         let neighbor = neighbors.shift();
-        // console.log(neighbor);
         
         if (neighbor.neighborMinesCount === 0
             && neighbor.hasMine === false
@@ -101,23 +113,16 @@ export default createStore({
         ) {
             neighbor.isOpen = true;
             let newNeighbors = getNeighbors(neighbor.row, neighbor.col, state.field);
-            // console.log('new', newNeighbors.length);
 
             newNeighbors = newNeighbors.filter(newNeighbor => {
               return (
-                // newNeighbor.neighborMinesCount === 0
                 newNeighbor.hasMine === false
                 && newNeighbor.isOpen === false
                 && newNeighbor.flagged === false
               );
             })
-            // console.log('new', newNeighbors.length);
-            // console.log(neighbors.length);
             neighbors.push(...newNeighbors);
-            // console.log(neighbors.length);
-            
-          // neighbors.push(...);
-        // }
+
         } else if (neighbor.neighborMinesCount !== 0
             && neighbor.hasMine === false
             && neighbor.isOpen === false
@@ -125,6 +130,17 @@ export default createStore({
           neighbor.isOpen = true;
         }
       }
+    },
+
+    toggleFlag({ commit }, block) { 
+      if (block.flagged) {
+        commit('removeFlag', block);
+        commit('decrementFlagCount');
+      } else {
+        commit('addFlag', block);
+        commit('incrementFlagCount');
+      }
+      
     },
 
     resetGame({ state, commit }) {
@@ -135,9 +151,10 @@ export default createStore({
         for (let j = 0; j < state.cols; j++) {
           field[i].push(new Block(i, j));
         }
-      }
-
+      }      
       commit('setField', field);
+      commit('setFlagCount', 0);
+      commit('setGameState', STATE_READY);
 
       // Reset timer
     },

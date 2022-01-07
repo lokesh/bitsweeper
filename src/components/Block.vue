@@ -5,8 +5,7 @@
       :class="{ 'is-open': block.isOpen }"
       aria-role="button"
       tabindex="0"
-      @click.exact="onClick"
-      @click.shift="onShiftClick"
+      @mouseup="onClick"
       @keyup.enter="onClick"
       @keyup.space.prevent="onClick"
     >
@@ -54,22 +53,30 @@ export default {
       } else if (this.block.neighborMinesCount > 0) {
         return this.block.neighborMinesCount;
       }
+      return '';
     },
   },
 
   methods: {
-    onClick() {
-      if (this.gameState === STATE_READY) {
-        this.$store.commit('setBlockToOpen', this.block);
-        this.$store.dispatch('startGame');
+    onClick(e) {
+      // FLAG
+      const isFlagging = (e.shiftKey === true || e.which > 1);
+
+      if (isFlagging && !this.isOpen) {
+        this.$store.dispatch('toggleFlag', this.block);
+      }  else {
+        // OPEN
+        // First click should never hit a mine, so we set initial block to open
+        // and then populate mines. We still need to run openBlock as the first
+        // click might have been a zero and we need to expand out.
+        if (this.gameState === STATE_READY) {
+          this.$store.commit('setBlockToOpen', this.block);
+          this.$store.dispatch('startGame');
+        } 
+        this.$store.dispatch('openBlock', this.block);    
       }
-      this.$store.dispatch('openBlock', this.block);
-    },
-    
-    onShiftClick() {
-      this.$store.commit('setFlag', this.block);
-    },
-  }
+    },    
+  },
 }
 </script>
 
@@ -90,6 +97,7 @@ export default {
 
 .block.is-open {
   background: #fff;
+  pointer-events: none;
 }
 
 /*.block:hover {
