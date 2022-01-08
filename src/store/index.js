@@ -12,8 +12,8 @@ import { play } from '@/utils/sound';
 export default createStore({
   state: {
     rows: 12,
-    cols: 10,
-    mines: 20,
+    cols: 8,
+    mines: 12,
     flags: 0,
     field: [],
     difficulty: null,

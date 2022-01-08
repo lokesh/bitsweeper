@@ -1,14 +1,13 @@
 <template>
   <div>
     <div
+      v-longpress="onLongpress"
       class="block"
       :class="{ 'is-open': block.isOpen }"
       aria-role="button"
       tabindex="0"
       :style="blockStyle"
       @mouseup="onClick"
-      @keyup.enter="onClick"
-      @keyup.space.prevent="onClick"
     >
     </div>
   </div>
@@ -55,6 +54,13 @@ export default {
     },
   },
 
+  data() {
+    return {
+      allowClick: true,
+      pointerDown: false,
+    };
+  },
+
   computed: {
     ...mapState([
       'cols',
@@ -80,7 +86,7 @@ export default {
       }
 
       // 2. Look up sprite in sheet
-      const spriteSize = 72;
+      const spriteSize = 48;
       let spec = spriteSpec[sprite];      
       let rowCol;
       
@@ -109,14 +115,26 @@ export default {
     },
   },
 
+  // TODO: remove bindings
+  mounted() {
+    ['mousedown', 'touchstart'].forEach(e => this.$el.addEventListener(e, this.onPointerdown));
+  },
+
   methods: {
+    flag() {
+      play(SFX_FLAG);
+      this.$store.dispatch('toggleFlag', this.block);
+    },
+    
     onClick(e) {
+      this.pointerDown = false;
+
+      if (!this.allowClick) return;
       // FLAG
       const isFlagging = (e.shiftKey === true || e.which > 1);
 
       if (isFlagging && !this.isOpen) {
-        play(SFX_FLAG);
-        this.$store.dispatch('toggleFlag', this.block);
+        this.flag();
       }  else {
         play(SFX_OPEN);
         // OPEN
@@ -129,7 +147,27 @@ export default {
         } 
         this.$store.dispatch('openBlock', this.block);    
       }
-    },    
+    }, 
+    
+    /* 
+    If a longpress occurs (set a flag), we don't want the click/mouseup default behavior (opening 
+    the block) to also occur on tap or mouse release up. We resolve by setting allowClick to false
+    and then enabling clickign again on the next mousedown/touchstart event.
+
+    On mobile, both the mousedown and touchstart events were firing so we set a pointerDown boolean
+    was added to prevent the code from running twice.
+    */
+    onPointerdown() {
+      if (this.pointerDown) return;
+
+      this.pointerDown = true;
+      this.allowClick = true;
+    },
+
+    onLongpress() {
+      this.allowClick = false;
+      this.flag();
+    },
   },
 }
 </script>
@@ -147,7 +185,7 @@ export default {
   cursor: pointer;
   font-size: 24px;
   background: url('../assets/sprites-1bit.png');
-  background-size: 720px 720px;
+  background-size: 480px 480px;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
@@ -161,8 +199,8 @@ export default {
 /*.block:hover {
   background: #666;
 }
-
+*/
 .block:focus {
-  background: #999;
-}*/
+  outline: none;
+}
 </style>

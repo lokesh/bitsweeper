@@ -17,7 +17,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import { STATE_LOST } from '@/utils/constants';
+import { STATE_LOST, SFX_RESTART } from '@/utils/constants';
+import { play } from '@/utils/sound';
 
 export default {
   name: 'ScoreBoard',
@@ -40,6 +41,7 @@ export default {
 
   methods: {
     resetGame() {
+      play(SFX_RESTART);
       this.$store.dispatch('resetGame');
     },
   }

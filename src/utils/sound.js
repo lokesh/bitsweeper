@@ -7,24 +7,31 @@ import {
   SFX_RESTART
 } from '@/utils/constants';
 
+const masterVol = 0.6;
+
 const flag = new Howl({
-  src: ['/sound/open2.wav']
+  src: ['/sound/open2.wav'],
+  volume: 0.3 * masterVol,
 });
 
 const mine = new Howl({
-  src: ['/sound/mine.wav']
+  src: ['/sound/mine.wav'],
+  volume: 0.5 * masterVol,
 });
 
 const open = new Howl({
-  src: ['/sound/open.wav']
+  src: ['/sound/open.wav'],
+  volume: 0.4 * masterVol,
 });
 
 const expand = new Howl({
-  src: ['/sound/open3.wav']
+  src: ['/sound/open3.wav'],
+  volume: 0.4 * masterVol,
 });
 
 const restart = new Howl({
-  src: ['/sound/restart.wav']
+  src: ['/sound/restart.wav'],
+  volume: 0.9 * masterVol,
 });
 
 export const play = (sound) => {

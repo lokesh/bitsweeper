@@ -1,15 +1,18 @@
 # Bitsweeper
 
 ## To-do
-
-- [ ] Support tap
-- [ ] Support long press and right click for flagging
+- [X] Support long press and right click for flagging
+- [ ] Add scoreboard UI - flag/mine counter (requires pixel font, make my own from sprites?), difficulty options, master volume? themes?
 ---
-- [ ] Finish sprite sheet numbers
-- [ ] Limit right-click disabling to just the field. Be a good person.
+- [ ] Limit right-click disabling to just the field. Be a good human.
+- [ ] Add particles when you open block
+- [ ] Sounds are loud! plus come up with final
 ---
+- [ ] Reduce sound file size. Convert to mp3?
 - [ ] Turn eslint on save back on by updating vue.config.js?
 
+## Bugs
+- [ ] Switching tabs on mobile and returning to game disables further sound playing.
 
 
 
@@ -44,4 +47,5 @@ Same name!!! boo
 
 
 Add cheat code: XYZZY shift + enter
+
 
