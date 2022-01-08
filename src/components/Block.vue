@@ -16,7 +16,12 @@
 
 <script>
 import { mapState } from 'vuex';
-import { STATE_READY } from '@/utils/constants';
+import {
+  STATE_READY,
+  SFX_FLAG,
+  SFX_OPEN,
+} from '@/utils/constants';
+import { play } from '@/utils/sound';
 
 
 // Values are ROW,COL
@@ -59,9 +64,9 @@ export default {
     ]),
 
     blockStyle() {
-      // Determine what to show and then look up sprite position
+      // 1. Determine what to show
       let sprite = 'block';
-
+      
       if (this.block.isOpen) {
         if (this.block.hasMine) {
           sprite = 'mine';
@@ -73,12 +78,12 @@ export default {
           sprite = 'flag';
         }
       }
-      // console.log(spriteSpec[sprite]);
-      const spriteSize = 48;
-      const spec = spriteSpec[sprite];
-      
+
+      // 2. Look up sprite in sheet
+      const spriteSize = 72;
+      let spec = spriteSpec[sprite];      
       let rowCol;
-      console.log(spec);
+      
       if (typeof spec === 'string') {
         rowCol = spec.split(',');  
       } else {
@@ -88,11 +93,10 @@ export default {
       
       let x = rowCol[1] * spriteSize * -1;
       let y = rowCol[0] * spriteSize * -1;
-      console.log(x, y);
+
       return {
         backgroundPosition: `${x}px ${y}px`,
       }
-      // return sprite;
     },
 
     label() {
@@ -111,8 +115,10 @@ export default {
       const isFlagging = (e.shiftKey === true || e.which > 1);
 
       if (isFlagging && !this.isOpen) {
+        play(SFX_FLAG);
         this.$store.dispatch('toggleFlag', this.block);
       }  else {
+        play(SFX_OPEN);
         // OPEN
         // First click should never hit a mine, so we set initial block to open
         // and then populate mines. We still need to run openBlock as the first
@@ -136,13 +142,12 @@ export default {
   width: var(--block-size);
   height: var(--block-size);
   background: var(--color-bg);
-/*  border: 1px solid var(--color);*/
   font-weight: bold;
   user-select: none;
   cursor: pointer;
   font-size: 24px;
-  background: url('../assets/sprites-muted.png');
-  background-size: 480px 480px;
+  background: url('../assets/sprites-1bit.png');
+  background-size: 720px 720px;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;

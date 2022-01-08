@@ -2,11 +2,17 @@ import { createStore } from 'vuex';
 import { STATE_ACTIVE, STATE_LOST, STATE_READY } from '@/utils/constants';
 import { getNeighbors } from '@/utils/index';
 import Block from '@/classes/Block';
+import {
+  SFX_EXPAND,
+  SFX_MINE,
+} from '@/utils/constants';
+import { play } from '@/utils/sound';
+
 
 export default createStore({
   state: {
-    rows: 10,
-    cols: 15,
+    rows: 12,
+    cols: 10,
     mines: 20,
     flags: 0,
     field: [],
@@ -79,6 +85,7 @@ export default createStore({
   },
   actions: {
     endGame({ commit }) {
+      play(SFX_MINE);
       commit('setGameState', STATE_LOST);
     },
 
@@ -104,6 +111,7 @@ export default createStore({
         neighbors to stack.
        */
       while (neighbors.length > 0) {
+        play(SFX_EXPAND);
         let neighbor = neighbors.shift();
         
         if (neighbor.neighborMinesCount === 0

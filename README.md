@@ -6,6 +6,7 @@
 - [ ] Support long press and right click for flagging
 ---
 - [ ] Finish sprite sheet numbers
+- [ ] Limit right-click disabling to just the field. Be a good person.
 ---
 - [ ] Turn eslint on save back on by updating vue.config.js?
 
