@@ -1,9 +1,11 @@
 # Bitsweeper
 
 ## To-do
+
 - [ ] Support tap
 - [ ] Support long press and right click for flagging
-
+---
+- [ ] Finish sprite sheet numbers
 ---
 - [ ] Turn eslint on save back on by updating vue.config.js?
 
@@ -41,3 +43,4 @@ Same name!!! boo
 
 
 Add cheat code: XYZZY shift + enter
+
