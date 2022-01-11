@@ -2,7 +2,10 @@
   <div>
     <div
       class="field"
-      :class="{ 'is-shaking': isShaking }"
+      :class="{
+        'is-shaking': isShaking,
+        'is-paused': isPaused,
+      }"
       :style="fieldStyles"
     >
       <block
@@ -17,7 +20,7 @@
 <script>
 import { mapState } from 'vuex';
 import Block from '@/components/Block'; 
-import { STATE_LOST } from '@/utils/constants';
+import { STATE_LOST, STATE_WON } from '@/utils/constants';
 
 export default {
   name: 'MineField',
@@ -65,13 +68,16 @@ export default {
         display: 'grid',
         gridTemplateColumns: `repeat(${this.cols}, var(--block-size))`,
       };
-    }
+    },
+
+    isPaused() {
+      return [STATE_LOST, STATE_WON].includes(this.gameState);
+    },
   },
 
   watch: {
     gameState(val) {
       if (val === STATE_LOST) {
-        console.log('shake');
         this.isShaking = true;
         setTimeout(() => {
           this.isShaking = false;
@@ -91,6 +97,10 @@ export default {
 </script>
 
 <style scoped>
+.field.is-paused {
+  pointer-events:  none;
+}
+
 .field.is-shaking {
   animation-name: shake;
   animation-duration: 0.3s;

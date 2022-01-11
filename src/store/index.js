@@ -19,7 +19,7 @@ export default createStore({
   state: {
     rows: 12,
     cols: 8,
-    mines: 12,
+    mines: 3,
     flags: 0, // Tracks how many flags have been planted
     blocksRemaining: null, // How many non-mine blocks left to open before win
     field: [],

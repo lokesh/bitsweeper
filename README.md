@@ -3,11 +3,10 @@
 ## To-do
 - [x] Support long press and right click for flagging
 - [x] Add check for win state
-- [ ] Win state?
-- [ ] Loss state
+- [x] Win state
+- [x] Loss state
 - [ ] Add scoreboard UI - flag/mine counter (requires pixel font, make my own from sprites?), difficulty options, master volume? themes?
-- [ ] Reducing gutter by 1?
-- [ ] Add title screen
+- [ ] Add settings
 
 ---
 - [x] Limit right-click disabling to just the field. Be a good human.
@@ -17,10 +16,9 @@
 - [ ] Add loader
 ---
 - [ ] Reduce sound file size. Convert to mp3?
-- [ ] Turn eslint on save back on by updating vue.config.js?
 
 ## Bugs
-- [ ] Switching tabs on mobile and returning to game disables further sound playing. Or putting phone on sleep. Do I need to re-import sound files?
+- [x] Switching tabs on mobile and returning to game disables further sound playing. Or putting phone on sleep. Do I need to re-import sound files?
 
 
 
@@ -46,12 +44,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-
-
-Design inspo:
-
-https://play.google.com/store/apps/details?id=com.gagonfe.onebitsweeper&hl=en_US&gl=US
-Same name!!! boo
 
 
 Add cheat code: XYZZY shift + enter

@@ -17,6 +17,8 @@
 import { mapState } from 'vuex';
 import {
   STATE_READY,
+  STATE_WON,
+  STATE_LOST,
   SFX_FLAG,
   SFX_OPEN,
 } from '@/utils/constants';
@@ -64,6 +66,19 @@ export default {
       } else {
         if (this.block.flagged) {
           sprite = 'flag';
+        }
+      }
+
+      // Won and Lost states
+      if (this.gameState === STATE_WON) {
+        // Put flags on all mines
+        if (this.block.hasMine && !this.block.isOpen) {
+            sprite = 'flag';
+        }
+      } else if (this.gameState === STATE_LOST) {
+        // Show all mines
+        if (this.block.hasMine) {
+          sprite = 'mine';
         }
       }
 
