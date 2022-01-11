@@ -80,6 +80,13 @@ export default {
     },
   },
 
+  mounted() {
+    // Disables default right-click behavior which pulls up the context menu.
+    this.$el.addEventListener('contextmenu', function(e){
+        e.preventDefault();
+    }, false);
+  },
+
 }
 </script>
 

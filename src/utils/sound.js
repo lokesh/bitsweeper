@@ -9,30 +9,39 @@ import {
 
 const masterVol = 0.6;
 
-const flag = new Howl({
-  src: ['/sound/open2.wav'],
-  volume: 0.3 * masterVol,
-});
+let flag;
+let mine;
+let open;
+let expand;
+let restart;
 
-const mine = new Howl({
-  src: ['/sound/mine.wav'],
-  volume: 0.5 * masterVol,
-});
+export const preloadSounds = () => {
+  flag = new Howl({
+    src: ['/sound/open2.wav'],
+    volume: 0.3 * masterVol,
+  });
 
-const open = new Howl({
-  src: ['/sound/open.wav'],
-  volume: 0.4 * masterVol,
-});
+  mine = new Howl({
+    src: ['/sound/mine.wav'],
+    volume: 0.5 * masterVol,
+  });
 
-const expand = new Howl({
-  src: ['/sound/open3.wav'],
-  volume: 0.4 * masterVol,
-});
+  open = new Howl({
+    src: ['/sound/open.wav'],
+    volume: 0.4 * masterVol,
+  });
 
-const restart = new Howl({
-  src: ['/sound/restart.wav'],
-  volume: 0.9 * masterVol,
-});
+  expand = new Howl({
+    src: ['/sound/open3.wav'],
+    volume: 0.2 * masterVol,
+  });
+
+  restart = new Howl({
+    src: ['/sound/restart.wav'],
+    volume: 0.9 * masterVol,
+  });
+
+}
 
 export const play = (sound) => {
   switch (sound) {

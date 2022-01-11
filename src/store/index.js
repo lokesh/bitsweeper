@@ -1,10 +1,16 @@
 import { createStore } from 'vuex';
-import { STATE_ACTIVE, STATE_LOST, STATE_READY } from '@/utils/constants';
+import {
+  STATE_ACTIVE,
+  STATE_LOST,
+  STATE_READY,
+  STATE_WON,
+} from '@/utils/constants';
 import { getNeighbors } from '@/utils/index';
 import Block from '@/classes/Block';
 import {
   SFX_EXPAND,
   SFX_MINE,
+  SFX_RESTART,
 } from '@/utils/constants';
 import { play } from '@/utils/sound';
 
@@ -14,7 +20,8 @@ export default createStore({
     rows: 12,
     cols: 8,
     mines: 12,
-    flags: 0,
+    flags: 0, // Tracks how many flags have been planted
+    blocksRemaining: null, // How many non-mine blocks left to open before win
     field: [],
     difficulty: null,
 
@@ -75,6 +82,12 @@ export default createStore({
       state.field[val.row][val.col].flagged = false;
     },
 
+    // We run this after the initial click on the field, so one block has already
+    // been opened, thus we need to minus 1.
+    resetBlocksRemaining(state) {
+      state.blocksRemaining = (state.rows * state.cols) - state.mines; 
+    },
+
     setFlagCount(state, val) {
       state.flags = val;
     },
@@ -84,7 +97,7 @@ export default createStore({
     }
   },
   actions: {
-    endGame({ commit }) {
+    loseGame({ commit }) {
       play(SFX_MINE);
       commit('setGameState', STATE_LOST);
     },
@@ -95,12 +108,19 @@ export default createStore({
 
       // If mine, end game
       if (hasMine) {
-        dispatch('endGame');
+        dispatch('loseGame');
+        return;
+      }
+
+      state.blocksRemaining--;
+
+      // Last block?
+      if (state.blocksRemaining <= 0) {
+        dispatch('winGame');
         return;
       }
 
       if (block.neighborMinesCount > 0) {
-        block.isOpen = true;
         return;
       }
 
@@ -119,6 +139,7 @@ export default createStore({
             && neighbor.isOpen === false
             && neighbor.flagged === false
         ) {
+            state.blocksRemaining--;
             neighbor.isOpen = true;
             let newNeighbors = getNeighbors(neighbor.row, neighbor.col, state.field);
 
@@ -135,9 +156,15 @@ export default createStore({
             && neighbor.hasMine === false
             && neighbor.isOpen === false
             && neighbor.flagged === false) {
+          state.blocksRemaining--;
           neighbor.isOpen = true;
         }
       }
+
+      // Last block?
+      if (state.blocksRemaining <= 0) {
+        dispatch('winGame');
+      }      
     },
 
     toggleFlag({ commit }, block) { 
@@ -169,7 +196,13 @@ export default createStore({
 
     startGame({ commit }) {
       commit('addMinesToField');
+      commit('resetBlocksRemaining');
       commit('setGameState', STATE_ACTIVE);
+    },
+
+    winGame({ commit }) {
+      play(SFX_RESTART);
+      commit('setGameState', STATE_WON);
     },
 
   },

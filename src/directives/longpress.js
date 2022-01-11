@@ -1,19 +1,19 @@
-const PRESS_TIMEOUT = 1000
+const PRESS_TIMEOUT = 250; // Longpress min in ms
 
-export const longpress = {
-  bind: function (el, { value }, vNode) {
+export default {
+  beforeMount(el, binding) {
+    let { value } = binding;
+    
     if (typeof value !== 'function') {
       console.warn(`Expect a function, got ${value}`)
       return
     }
 
     let pressTimer = null
-
     const start = e => {
-      if (e.type === 'click' && e.button !== 0) {
+      if (e.type === 'mousedown' && e.button !== 0) {
         return;
       }
-
       if (pressTimer === null) {
         pressTimer = setTimeout(() => value(e), PRESS_TIMEOUT)
       }
@@ -27,6 +27,6 @@ export const longpress = {
     }
 
     ['mousedown', 'touchstart'].forEach(e => el.addEventListener(e, start));
-    ['click', 'mouseout', 'touchend', 'touchcancel'].forEach(e => el.addEventListener(e, cancel));
+    ['click', 'mouseout', 'touchend', 'touchcancel'].forEach(e => el.addEventListener(e, cancel));    
   }
-})
+};
