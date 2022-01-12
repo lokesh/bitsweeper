@@ -2,7 +2,7 @@
   <div>
     <div
       v-longpress="onLongpress"
-      class="block"
+      class="g-sprite block"
       :class="{ 'is-open': block.isOpen }"
       aria-role="button"
       tabindex="0"
@@ -161,13 +161,7 @@ export default {
 .block {
   width: var(--block-size);
   height: var(--block-size);
-  background: var(--color-bg);
   cursor: pointer;
-  background: url('../assets/sprites-1bit.png');
-  background-size: 480px 480px;
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
 }
 
 .block.is-open {

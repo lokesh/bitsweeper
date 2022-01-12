@@ -13,6 +13,7 @@ const spritePositions = {
   'block': ['0,1','1,1','2,1','3,1','4,1','5,1','6,1','7,1','8,1'],
   'flag': '0,2',
   'mine': '1,2',
+  'menu': '2,2',
   'p-rest': '0,3',
   'p-rest-blink': '7,3',
   'p-unsure': '1,3',

@@ -11,25 +11,60 @@
   --color-error: #fd6d32;
   --color-recessed: hsl(43deg 80% 52%);
 
+
+  /* Pico */
+ /* --color-bg: #1F2C50;*/
+
+  /* Contrast */
+  /*--color-bg: #020408;*/
+
+  /* 1-bit */
   --color-bg: #271C31;
+
+
   --color: #CCCCCB;
   --color-focus: #3d88f8;
 
-  /* ------ */
-  /* LAYOUT */
-  /* ------ */
+  /* --------- */
+  /* PIXEL ART */
+  /* --------- */
+
+  /* Each sprite pixel is displayed at 4x */
+  --pixel-size: 4;
+
+  --spritesheet-width: 120px;
+  --spritesheet-height: 120px;
+
+  --spritesheet-render-width: calc(var(--spritesheet-width) * var(--pixel-size));
+  --spritesheet-render-height: calc(var(--spritesheet-height) * var(--pixel-size));
+
 
   --block-size: 48px;
+
+  /* ----------- */
+  /* GAME CONFIG */
+  /* ----------- */
+
   --cols: 8;
 }
 
-@media (min-width: 640px) {
-  :root {
-    --gutter: 24px;
-    --gutter-sm: 8px;
-  }
+
+/* ------------ */
+/* GLOBAL UTILS */
+/* ------------ */
+
+.g-sprite {
+  background: url('../assets/sprites-1bit.png');
+  background-size: var(--spritesheet-render-width) var(--spritesheet-render-height);
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
+
+/* ----------- */
+/* BASE STYLES */
+/* ----------- */
 
 * {
   box-sizing: border-box;

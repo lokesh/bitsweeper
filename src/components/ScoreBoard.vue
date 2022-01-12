@@ -1,13 +1,22 @@
 <template>
   <div class="score-board">
-    <div>
-      █ {{ blocksRemaining }}
+    <div
+      class="g-sprite menu-button"
+      aria-role="button"
+      tabindex="0"
+      :style="menuButtonStyle"
+      @click="openMenu"
+      @keyup.enter.space="openMenu"
+    />    
+    <div class="mine-count">
+      <div class="g-sprite mine-icon" />    
+      <number :value="remainingMinesCount" />
     </div>
     <!-- <div>
       💣 {{ mines - flags }}
     </div>-->
     <div
-      class="player"
+      class="g-sprite player"
       aria-role="button"
       tabindex="0"
       :style="playerStyle"
@@ -19,6 +28,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import Number from '@/components/Number';
 import { STATE_LOST, STATE_WON, SFX_RESTART } from '@/utils/constants';
 import { play } from '@/utils/sound';
 import { getSpritePosition } from '@/utils/sprite';
@@ -26,6 +36,10 @@ import { getSpritePosition } from '@/utils/sprite';
 export default {
   name: 'ScoreBoard',
   
+  components: {
+    Number,
+  },
+
   computed: {
     ...mapState([
       'blocksRemaining',
@@ -33,6 +47,12 @@ export default {
       'mines',
       'gameState',
     ]),
+
+    menuButtonStyle() {      
+      return {
+        backgroundPosition: getSpritePosition('menu'),
+      };
+    },
 
     playerStyle() {      
       let sprite = 'p-rest';
@@ -48,9 +68,20 @@ export default {
         backgroundPosition: getSpritePosition(sprite),
       }
     },
+
+    remainingMinesCount() {
+      let str = String(Math.max(0, this.mines - this.flags));
+      if (str.length < 2) {
+        str = `0${str}`; 
+      }
+      return str;
+    }
   },
 
   methods: {
+    openMenu() {
+      console.log('TODO: Open menu');
+    },
     resetGame() {
       play(SFX_RESTART);
       this.$store.dispatch('resetGame');
@@ -66,16 +97,29 @@ export default {
   gap: 36px;
 }
 
+.menu-button {
+  width: var(--block-size);
+  height: var(--block-size);
+  cursor: pointer;
+  outline: none;
+}
+
+.mine-count {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.mine-icon {
+  width: calc(4px * var(--pixel-size));
+  height:  calc(6px * var(--pixel-size));
+  background-position: -352px 0;
+}
+
 .player {
   width: var(--block-size);
   height: var(--block-size);
-  background: var(--color-bg);
   cursor: pointer;
-  background: url('../assets/sprites-1bit.png');
-  background-size: 480px 480px;
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
   outline: none;
 }
 </style>
