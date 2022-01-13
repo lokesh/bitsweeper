@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import {
   DIFFICULTY_MEDIUM,
-  THEME_1BIT,
+  THEME_EGA,
 } from '@/utils/constants';
 import App from './App.vue'
 import store from './store'
@@ -12,7 +12,7 @@ const app = createApp(App);
 
 // Configure default state
 store.dispatch('changeDifficulty', DIFFICULTY_MEDIUM);
-store.dispatch('changeTheme', THEME_1BIT);
+store.dispatch('changeTheme', THEME_EGA);
 
 app.use(store);
 app.directive('longpress', longpress);

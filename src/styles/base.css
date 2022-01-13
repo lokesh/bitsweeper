@@ -52,7 +52,7 @@
 
 .theme-contrast {
   --color-bg: #020408;
-  --color-overlay: rgba(2, 4, 8, 0.95);
+  --color-overlay: rgba(2, 4, 8, 0.8);
 }
 
 .theme-contrast .g-sprite {
@@ -60,18 +60,26 @@
 }
 
 .theme-ega {
-  --color-bg:rgb(41, 22, 81);
-  --color-overlay: rgba(41, 22, 81, 0.95);
+  --color-bg:rgb(0, 0, 0);
+  --color-overlay: rgba(0, 0, 0, 0.8);
 }
 
 .theme-ega .g-sprite {
   background-image: url('../assets/sprites-ega.png');
 }
 
+.theme-cga {
+  --color-bg:rgb(0, 0, 0);
+  --color-overlay: rgba(0, 0, 0, 0.8);
+}
+
+.theme-cga .g-sprite {
+  background-image: url('../assets/sprites-cga.png');
+}
 
 .theme-pico {
   --color-bg: #1F2C50;
-  --color-overlay: rgba(31, 40, 80, 0.95);
+  --color-overlay: rgba(31, 40, 80, 0.9);
 }
 
 .theme-pico .g-sprite {

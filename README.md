@@ -1,20 +1,12 @@
 # Bitsweeper
 
 ## To-do
-- [x] Support long press and right click for flagging
-- [x] Add check for win state
-- [x] Win state
-- [x] Loss state
-- [x] Add small number font
-- [x] Add blinking to player and a worried fave on start of mouse/tap
-- [x] Add scoreboard UI - flag/mine counter (requires pixel font, make my own from sprites?)
-- [x] Add modal for settings/title screen
-- [x] Add difficulty options
-- [ ] Add theme options?
-- [x] Use default difficult to set rows, cols, mines on load
 
----
-- [x] Limit right-click disabling to just the field. Be a good human.
+- [ ]  Diff title color for ega
+
+
+**Nice to haves**
+
 - [ ] Sound: They are loud and grating! Using mine>explosion, thud/plant>flag, open>subtle chick. Add win sound.
 - [x] One more theme
 - [ ] Animation: Add particles when you open block
@@ -24,19 +16,17 @@
 - [ ] Reduce sound file size. Convert to mp3?
 
 ## Bugs
+- [ ] 100vh is too much, causing spaceing beause of Safari's address bar floating above
+- [ ] Don't flag mines on scroll
 - [ ] Random block sprites get set on clicking smiley and then again on first press
 - [ ] Switching tabs on mobile and returning to game disables further sound playing. Or putting phone on sleep. Do I need to re-import sound files? see examples on howlerjs site which work properly.
 The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu
-
-## How to add a theme
-- base.css
-- constants
-
 
 ## Lessons
 
 - **Project Mgmt**
   - The README.md worked well for tracking to-dos and taking notes.
+  - Game dev plumbing takes 4x longer than expected. This is the wiring up of screens, handling different states (ready, active, paused, won, lost, et al), building UI, and more.
 - **Debugging**
   - Set up permanent debugging panel for variable watching and state toggling.
 - **Pixel art**

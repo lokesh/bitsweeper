@@ -45,30 +45,13 @@ export const PIXEL_SIZE = 4;
 
 export const THEME_1BIT = '1bit';
 export const THEME_CONTRAST = 'contrast';
+export const THEME_CGA = 'cga';
 export const THEME_EGA = 'ega';
 // export const THEME_PICO = 'pico';
 
 export const THEMES = [
   THEME_1BIT,
   THEME_CONTRAST,
+  THEME_CGA,  
   THEME_EGA,
-  // THEME_PICO,
 ]
-// export const THEMES = {
-//   [THEME_1BIT]: {
-//     src: 'sprite-1bit.png',
-//     bg: '#271C31',
-//     overlay:'rgba(39, 28, 49, 0.95)',
-//   },
-//   [THEME_CONTRAST]: {
-//     src: 'sprite-contrast.png',
-//     bg: '#020408',
-//     overlay:'rgba(39, 28, 49, 0.95)',
-//   },
-//   [THEME_PICO]: {
-//     src: 'sprite-pico.png',
-//     bg: '#1F2C50',
-//     overlay:'rgba(39, 28, 49, 0.95)',
-//   }
-// };
-
