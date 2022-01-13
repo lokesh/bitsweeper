@@ -12,21 +12,32 @@
       <div class="g-sprite mine-icon" />    
       <number :value="remainingMinesCount" />
     </div>
-    <div
-      class="g-sprite player"
-      :class="playerClass"
-      aria-role="button"
-      tabindex="0"
-      @click="resetGame"
-      @keyup.enter.space="resetGame"
-    />    
+    <div class="player-corner">
+      <sprite
+        v-if="isGameover"
+        class="arrow"
+        :x="24"
+        :y="36"
+        :width="12"
+        :height="12"
+      />    
+      <div
+        class="g-sprite player"
+        :class="playerClass"
+        aria-role="button"
+        tabindex="0"
+        @click="resetGame"
+        @keyup.enter.space="resetGame"
+      />    
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import Number from '@/components/Number';
-import { STATE_LOST, STATE_WON, SFX_RESTART } from '@/utils/constants';
+import Sprite from '@/components/Sprite';
+import { MODAL_SETTINGS, STATE_LOST, STATE_WON, SFX_RESTART } from '@/utils/constants';
 import { play } from '@/utils/sound';
 import { getSpritePosition } from '@/utils/sprite';
 
@@ -35,15 +46,24 @@ export default {
   
   components: {
     Number,
+    Sprite,
   },
 
   computed: {
+    ...mapGetters([
+      'remainingMinesCount',
+    ]),
+
     ...mapState([
       'blocksRemaining',
       'flags',
       'mines',
       'gameState',
     ]),
+
+    isGameover() {
+      return [STATE_LOST, STATE_WON].includes(this.gameState);
+    },
 
     menuButtonStyle() {      
       return {
@@ -59,19 +79,11 @@ export default {
       }
       return 'player-rest';
     },
-
-    remainingMinesCount() {
-      let str = String(Math.max(0, this.mines - this.flags));
-      if (str.length < 2) {
-        str = `0${str}`; 
-      }
-      return str;
-    }
   },
 
   methods: {
     openMenu() {
-      console.log('TODO: Open menu');
+      this.$store.commit('openModal', MODAL_SETTINGS);
     },
     resetGame() {
       play(SFX_RESTART);
@@ -107,14 +119,35 @@ export default {
   background-position: -352px 0;
 }
 
+.player-corner {
+  display: flex;
+}
+
+.arrow {
+  animation: bounce 2s infinite;
+}
+
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(-8px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+}
+
 .player {
   width: var(--block-size);
   height: var(--block-size);
   cursor: pointer;
+  outline: none;  
 }
 
 .player-rest {
-  outline: none;
   animation: rest 3s steps(1) infinite;  
 }
 
@@ -131,23 +164,22 @@ export default {
 }
 
 .player-won {
-  outline: none;
   animation: won 3s steps(1) infinite;  
 }
 
 @keyframes won {
   0% {
-    background-position: -144px -144px;
+    background-position: -144px -192px;
   }
   95% {
-    background-position: -144px -192px;
+    background-position: -144px -240px;
   }
   100% {
-    background-position: -144px -192px;
+    background-position: -144px -240px;
   }
 }
 
 .player-lost {
-  background-position: -144px -96px;  
+  background-position: -144px -96px;
 }
 </style>

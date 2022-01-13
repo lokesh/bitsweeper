@@ -7,8 +7,11 @@
 - [x] Loss state
 - [x] Add small number font
 - [x] Add blinking to player and a worried fave on start of mouse/tap
-- [ ] Add scoreboard UI - flag/mine counter (requires pixel font, make my own from sprites?), difficulty options, master volume? themes?
-- [ ] Add settings
+- [x] Add scoreboard UI - flag/mine counter (requires pixel font, make my own from sprites?)
+- [ ] Add modal for settings/title screen
+- [ ] Add difficulty options
+- [ ] Add theme options?
+- [ ] Use default difficult to set rows, cols, mines on load
 
 ---
 - [x] Limit right-click disabling to just the field. Be a good human.
@@ -27,8 +30,8 @@
 
 ## Lessons
 
+
 - **Pixel art**
   - Define sprite size at start, mock up entire game board, as changing requires redrawing everything.
   - If using multiple sprite sizes, separate into different files. This makes writing shared utils to look up sprite position with row/col (x,y) vals easier.
   - Don't use Photoshop to make sprites. It is clunky (e.g. exporting requires 5 clicks; fight with dated interface) and overkill in featureset, try Aesprite.
-

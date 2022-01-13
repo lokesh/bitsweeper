@@ -20,7 +20,7 @@
 
   /* 1-bit */
   --color-bg: #271C31;
-
+  --color-overlay: rgba(39, 28, 49, 0.95);
 
   --color: #CCCCCB;
   --color-focus: #3d88f8;

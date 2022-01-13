@@ -1,5 +1,9 @@
 import { createStore } from 'vuex';
 import {
+  DIFFICULTIES,
+  DIFFICULTY_EASY,
+  DIFFICULTY_MEDIUM,
+  DIFFICULTY_HARD,
   STATE_ACTIVE,
   STATE_LOST,
   STATE_READY,
@@ -14,18 +18,24 @@ import {
 } from '@/utils/constants';
 import { play } from '@/utils/sound';
 
+const initConfig = DIFFICULTIES[DIFFICULTY_MEDIUM];
 
 export default createStore({
   state: {
-    rows: 12,
-    cols: 8,
-    mines: 1,
+    // Each image pixel is rendered 4x
+    pixelSize: 4,
+
+    rows: initConfig.rows,
+    cols: initConfig.cols,
+    mines: initConfig.mines,
     flags: 0, // Tracks how many flags have been planted
     blocksRemaining: null, // How many non-mine blocks left to open before win
     field: [],
-    difficulty: null,
+    difficulty: DIFFICULTY_MEDIUM,
 
     gameState: STATE_READY,
+
+    modal: null, //'settings',
   },
   mutations: {
     addFlag(state, val) {
@@ -58,6 +68,10 @@ export default createStore({
       }
     },
 
+    closeModal(state) {
+      state.modal = null;
+    },
+
     decrementFlagCount(state) {
       state.flags--;
     },
@@ -66,16 +80,9 @@ export default createStore({
       state.flags++;
     },
 
-    setBlockToOpen(state, val) {
-      state.field[val.row][val.col].isOpen = true;
-    },
 
-    setDifficulty() {
-
-    },
-
-    setField(state, val) {
-      state.field = val;
+    openModal(state, val) {
+      state.modal = val;
     },
 
     removeFlag(state, val) {
@@ -88,15 +95,49 @@ export default createStore({
       state.blocksRemaining = (state.rows * state.cols) - state.mines; 
     },
 
+    setBlockToOpen(state, val) {
+      state.field[val.row][val.col].isOpen = true;
+    },
+
+    setCols(state, val) {
+      state.cols = val;
+    },
+
+    setDifficulty(state, val) {
+      state.difficulty = val;
+    },
+
+    setField(state, val) {
+      state.field = val;
+    },
+
     setFlagCount(state, val) {
       state.flags = val;
     },
 
     setGameState(state, val) {
       state.gameState = val;
-    }
+    },
+
+    setMines(state, val) {
+      state.mines = val;
+    },
+
+    setRows(state, val) {
+      state.rows = val;
+    },
   },
   actions: {
+    changeDifficulty({ commit, dispatch }, difficulty) {
+      const config = DIFFICULTIES[difficulty];
+
+      commit('setDifficulty', difficulty);
+      commit('setRows', config.rows);
+      commit('setCols', config.cols);
+      commit('setMines', config.mines);
+
+      dispatch('resetGame');
+    },
     loseGame({ commit }) {
       play(SFX_MINE);
       commit('setGameState', STATE_LOST);
@@ -167,6 +208,16 @@ export default createStore({
       }      
     },
 
+    toggleDifficulty({ state, dispatch }) {
+      if (state.difficulty === DIFFICULTY_EASY) {
+        dispatch('changeDifficulty', DIFFICULTY_MEDIUM);
+      } else if (state.difficulty === DIFFICULTY_MEDIUM) {
+        dispatch('changeDifficulty', DIFFICULTY_HARD);
+      } else {
+        dispatch('changeDifficulty', DIFFICULTY_EASY);
+      }
+    },
+
     toggleFlag({ commit }, block) { 
       if (block.flagged) {
         commit('removeFlag', block);
@@ -200,10 +251,20 @@ export default createStore({
       commit('setGameState', STATE_ACTIVE);
     },
 
-    winGame({ commit }) {
+    winGame({ state, commit }) {
       play(SFX_RESTART);
+      commit('setFlagCount', state.mines);
       commit('setGameState', STATE_WON);
     },
+  },
 
+  getters: {
+    remainingMinesCount(state) {
+      let str = String(Math.max(0, state.mines - state.flags));
+      if (str.length < 2) {
+        str = `0${str}`; 
+      }
+      return str;
+    },
   },
 })

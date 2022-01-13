@@ -19,6 +19,7 @@ const spritePositions = {
   'p-unsure': '1,3',
   'p-won': '0,3',
   'p-loss': '3,3',
+  'arrow-right': '2, 3',
 };
 
 /**

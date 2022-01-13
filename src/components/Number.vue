@@ -28,7 +28,6 @@ export default {
   methods: {
     getStyleForDigit(digit) {
       let leftOffset = -192 - (digit * 16);
-      console.log(leftOffset);
       return {
         backgroundPosition: `${leftOffset}px 0`,
       };

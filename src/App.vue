@@ -1,17 +1,34 @@
 <template>
   <div class="app">
     <game-board />
+    <settings-modal v-if="modal === MODAL_SETTINGS" />
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import GameBoard from '@/components/GameBoard.vue'
-import { preloadSounds } from '@/utils/sound.js';
+import SettingsModal from '@/components/SettingsModal';
+import { MODAL_SETTINGS } from '@/utils/constants';
+import { preloadSounds } from '@/utils/sound';
 
 export default {
   name: 'App',
   components: {
     GameBoard,
+    SettingsModal,
+  },
+
+  data() {
+    return {
+      MODAL_SETTINGS,
+    };
+  },
+
+  computed: {
+    ...mapState([
+      'modal',
+    ]),
   },
 
   mounted() {
