@@ -77,13 +77,13 @@
   background-image: url('../assets/sprites-cga.png');
 }
 
-.theme-pico {
-  --color-bg: #1F2C50;
-  --color-overlay: rgba(31, 40, 80, 0.9);
+.theme-muted {
+  --color-bg: rgb(25, 25, 25);
+  --color-overlay: rgba(25, 25, 25, 0.8);
 }
 
-.theme-pico .g-sprite {
-  background-image: url('../assets/sprites-pico.png');
+.theme-muted .g-sprite {
+  background-image: url('../assets/sprites-muted.png');
 }
 
 
@@ -92,8 +92,6 @@
 /* ------------ */
 
 .g-sprite {
-/*  background: url('../assets/sprites-pico.png');
-  background: url('../assets/sprites-contrast.png');*/
   background-size: var(--spritesheet-render-width) var(--spritesheet-render-height);
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;

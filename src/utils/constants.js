@@ -47,11 +47,12 @@ export const THEME_1BIT = '1bit';
 export const THEME_CONTRAST = 'contrast';
 export const THEME_CGA = 'cga';
 export const THEME_EGA = 'ega';
-// export const THEME_PICO = 'pico';
+export const THEME_MUTED = 'muted';
 
 export const THEMES = [
   THEME_1BIT,
   THEME_CONTRAST,
   THEME_CGA,  
   THEME_EGA,
+  THEME_MUTED,
 ]
