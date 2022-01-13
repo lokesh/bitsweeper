@@ -1,5 +1,8 @@
 <template>
-  <div class="app">
+  <div
+    class="app"
+    :class="appClass"
+  >
     <game-board />
     <settings-modal v-if="modal === MODAL_SETTINGS" />
   </div>
@@ -28,7 +31,12 @@ export default {
   computed: {
     ...mapState([
       'modal',
+      'theme',
     ]),
+  
+    appClass() {
+      return `theme-${this.theme}`;
+    },
   },
 
   mounted() {
@@ -54,4 +62,10 @@ export default {
 
 <style>
 @import "./styles/base.css";
+</style>
+
+<style scoped>
+.app {
+  min-height: 100vh;
+}
 </style>

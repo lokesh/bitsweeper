@@ -28,7 +28,7 @@
             :x="88"
             :y="0"
           />
-          <number :value="remainingMinesCount" />
+          <number :value="mines" />
       </sprite>
 
         <sprite
@@ -37,7 +37,19 @@
           :y="24"
           :width="21"
           :height="21"
-        />
+          aria-role="button"
+          tabindex="0"
+          @click="toggleTheme"
+          @keyup.enter.space="toggleTheme"
+        >
+          <sprite
+            class="themes"
+            :x="72"
+            :y="24"
+            :width="17"
+            :height="17"
+          />
+        </sprite>
       </div>
 
       <div class="bottom-row">
@@ -59,15 +71,12 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
+import { mapState } from 'vuex';
 import Number from '@/components/Number';
 import Sprite from '@/components/Sprite';
 import {
   DIFFICULTIES,
-  SFX_FLAG,
-  SFX_OPEN,
 } from '@/utils/constants';
-import { play } from '@/utils/sound';
 
 export default {
   name: 'SettingsModal',
@@ -84,16 +93,12 @@ export default {
   },
 
   computed: {
-    ...mapGetters([
-      'remainingMinesCount',
-    ]),
-
     ...mapState([
       'difficulty',
     ]),
 
     mines() {
-      return DIFFICULTIES[this.difficulty].mines;
+      return String(DIFFICULTIES[this.difficulty].mines);
     },
   },
 
@@ -101,8 +106,13 @@ export default {
     closeSettings() {
       this.$store.commit('closeModal');
     },
+    
     toggleDifficulty() {
       this.$store.dispatch('toggleDifficulty');
+    },
+    
+    toggleTheme() {
+      this.$store.dispatch('toggleTheme');
     },
   }
 }
@@ -146,6 +156,7 @@ export default {
   align-items: center;
   cursor: pointer;
   outline: none;
+  padding: 4px;
 }
 
 .bottom-row {

@@ -1,7 +1,7 @@
 <template>
   <div class="game-board">
     <score-board class="score-board" />
-    <mine-field />
+    <mine-field class="mine-field" />
   </div>
 </template>
 
@@ -31,10 +31,17 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
   user-select: none;
 }
 
 .score-board {
   width: calc(var(--block-size) * var(--cols));
+}
+
+.mine-field {
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
 }
 </style>

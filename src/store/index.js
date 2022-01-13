@@ -8,6 +8,8 @@ import {
   STATE_LOST,
   STATE_READY,
   STATE_WON,
+  THEMES,
+
 } from '@/utils/constants';
 import { getNeighbors } from '@/utils/index';
 import Block from '@/classes/Block';
@@ -18,21 +20,18 @@ import {
 } from '@/utils/constants';
 import { play } from '@/utils/sound';
 
-const initConfig = DIFFICULTIES[DIFFICULTY_MEDIUM];
-
 export default createStore({
   state: {
-    // Each image pixel is rendered 4x
-    pixelSize: 4,
+    difficulty: null,
+    theme: null,
 
-    rows: initConfig.rows,
-    cols: initConfig.cols,
-    mines: initConfig.mines,
+    rows: null,
+    cols: null,
+    mines: null,
     flags: 0, // Tracks how many flags have been planted
     blocksRemaining: null, // How many non-mine blocks left to open before win
     field: [],
-    difficulty: DIFFICULTY_MEDIUM,
-
+    
     gameState: STATE_READY,
 
     modal: null, //'settings',
@@ -126,6 +125,10 @@ export default createStore({
     setRows(state, val) {
       state.rows = val;
     },
+
+    setTheme(state, val) {
+      state.theme = val;
+    },
   },
   actions: {
     changeDifficulty({ commit, dispatch }, difficulty) {
@@ -138,6 +141,15 @@ export default createStore({
 
       dispatch('resetGame');
     },
+    
+    /*
+      App.vue sets a class on root node for app 'theme-FOOBAZ'. 
+      Theme styles are set in base.css.
+     */
+    changeTheme({ commit }, theme) {
+      commit('setTheme', theme);
+    },    
+
     loseGame({ commit }) {
       play(SFX_MINE);
       commit('setGameState', STATE_LOST);
@@ -225,8 +237,13 @@ export default createStore({
       } else {
         commit('addFlag', block);
         commit('incrementFlagCount');
-      }
-      
+      }      
+    },
+
+    toggleTheme({ state, dispatch }) {
+      const index = THEMES.indexOf(state.theme);
+      const newIndex = (index + 1) % THEMES.length;
+      dispatch('changeTheme', THEMES[newIndex]);
     },
 
     resetGame({ state, commit }) {

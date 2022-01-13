@@ -11,17 +11,6 @@
   --color-error: #fd6d32;
   --color-recessed: hsl(43deg 80% 52%);
 
-
-  /* Pico */
- /* --color-bg: #1F2C50;*/
-
-  /* Contrast */
-  /*--color-bg: #020408;*/
-
-  /* 1-bit */
-  --color-bg: #271C31;
-  --color-overlay: rgba(39, 28, 49, 0.95);
-
   --color: #CCCCCB;
   --color-focus: #3d88f8;
 
@@ -48,13 +37,55 @@
   --cols: 8;
 }
 
+/* ------ */
+/* THEMES */
+/* ------ */
+
+.theme-1bit {
+  --color-bg: #271c31;
+  --color-overlay: rgba(39, 28, 49, 0.95);
+}
+
+.theme-1bit .g-sprite {
+  background-image: url('../assets/sprites-1bit.png');
+}
+
+.theme-contrast {
+  --color-bg: #020408;
+  --color-overlay: rgba(2, 4, 8, 0.95);
+}
+
+.theme-contrast .g-sprite {
+  background-image: url('../assets/sprites-contrast.png');
+}
+
+.theme-ega {
+  --color-bg:rgb(41, 22, 81);
+  --color-overlay: rgba(41, 22, 81, 0.95);
+}
+
+.theme-ega .g-sprite {
+  background-image: url('../assets/sprites-ega.png');
+}
+
+
+.theme-pico {
+  --color-bg: #1F2C50;
+  --color-overlay: rgba(31, 40, 80, 0.95);
+}
+
+.theme-pico .g-sprite {
+  background-image: url('../assets/sprites-pico.png');
+}
+
 
 /* ------------ */
 /* GLOBAL UTILS */
 /* ------------ */
 
 .g-sprite {
-  background: url('../assets/sprites-1bit.png');
+/*  background: url('../assets/sprites-pico.png');
+  background: url('../assets/sprites-contrast.png');*/
   background-size: var(--spritesheet-render-width) var(--spritesheet-render-height);
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
@@ -73,12 +104,14 @@
 body {
   margin: 0;
   padding: 0;
-  color: var(--color);
-  background: var(--color-bg);
   /* Attempt to disable iOS double tap zoom with CSS. These stopped working as
   July 2020. */
   /* touch-action: manipulation;*/
   /* ouch-action: none;*/
+}
+
+.app {
+  background: var(--color-bg);
 }
 
 body,

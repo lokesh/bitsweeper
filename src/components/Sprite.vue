@@ -11,8 +11,7 @@ Convenience component for rendering static sprites from spritesheet
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
+import { PIXEL_SIZE } from '@/utils/constants';
 
 export default {
   name: 'Number',
@@ -37,15 +36,11 @@ export default {
   },
 
   computed: {
-    ...mapState([
-      'pixelSize',
-    ]),
-  
     spriteStyle() {
       return {
-        width: `${this.width * this.pixelSize}px`,
-        height: `${this.height * this.pixelSize}px`,
-        backgroundPosition: `${this.x * -this.pixelSize}px ${this.y * -this.pixelSize}px`,
+        width: `${this.width * PIXEL_SIZE}px`,
+        height: `${this.height * PIXEL_SIZE}px`,
+        backgroundPosition: `${this.x * -PIXEL_SIZE}px ${this.y * -PIXEL_SIZE}px`,
       };
     },
   }
