@@ -5,8 +5,8 @@
 - [x] Add check for win state
 - [x] Win state
 - [x] Loss state
-- [ ] Add small number font
-- [ ] Add blinking to player and a worried fave on start of mouse/tap
+- [x] Add small number font
+- [x] Add blinking to player and a worried fave on start of mouse/tap
 - [ ] Add scoreboard UI - flag/mine counter (requires pixel font, make my own from sprites?), difficulty options, master volume? themes?
 - [ ] Add settings
 
@@ -25,36 +25,9 @@
 - [] Switching tabs on mobile and returning to game disables further sound playing. Or putting phone on sleep. Do I need to re-import sound files? see examples on howlerjs site which work properly.
 
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-
-Add cheat code: XYZZY shift + enter
-
-
 ## Lessons
 
-- Pixel art
+- **Pixel art**
   - Define sprite size at start, mock up entire game board, as changing requires redrawing everything.
   - If using multiple sprite sizes, separate into different files. This makes writing shared utils to look up sprite position with row/col (x,y) vals easier.
   - Don't use Photoshop to make sprites. It is clunky (e.g. exporting requires 5 clicks; fight with dated interface) and overkill in featureset, try Aesprite.

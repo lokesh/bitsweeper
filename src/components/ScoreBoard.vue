@@ -12,14 +12,11 @@
       <div class="g-sprite mine-icon" />    
       <number :value="remainingMinesCount" />
     </div>
-    <!-- <div>
-      💣 {{ mines - flags }}
-    </div>-->
     <div
       class="g-sprite player"
+      :class="playerClass"
       aria-role="button"
       tabindex="0"
-      :style="playerStyle"
       @click="resetGame"
       @keyup.enter.space="resetGame"
     />    
@@ -54,19 +51,13 @@ export default {
       };
     },
 
-    playerStyle() {      
-      let sprite = 'p-rest';
+    playerClass() {
       if (this.gameState === STATE_LOST) {
-        sprite = 'p-loss';
+        return 'player-lost';
+      } else if (this.gameState === STATE_WON) {
+        return 'player-won';
       }
-
-      if (this.gameState === STATE_WON) {
-        sprite = 'p-won';
-      }
-
-      return {
-        backgroundPosition: getSpritePosition(sprite),
-      }
+      return 'player-rest';
     },
 
     remainingMinesCount() {
@@ -120,6 +111,43 @@ export default {
   width: var(--block-size);
   height: var(--block-size);
   cursor: pointer;
+}
+
+.player-rest {
   outline: none;
+  animation: rest 3s steps(1) infinite;  
+}
+
+@keyframes rest {
+  0% {
+    background-position: -144px 0;
+  }
+  95% {
+    background-position: -144px -48px;
+  }
+  100% {
+    background-position: -144px -48px;
+  }
+}
+
+.player-won {
+  outline: none;
+  animation: won 3s steps(1) infinite;  
+}
+
+@keyframes won {
+  0% {
+    background-position: -144px -144px;
+  }
+  95% {
+    background-position: -144px -192px;
+  }
+  100% {
+    background-position: -144px -192px;
+  }
+}
+
+.player-lost {
+  background-position: -144px -96px;  
 }
 </style>

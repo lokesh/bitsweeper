@@ -17,7 +17,7 @@ const spritePositions = {
   'p-rest': '0,3',
   'p-rest-blink': '7,3',
   'p-unsure': '1,3',
-  'p-won': '0,4',
+  'p-won': '0,3',
   'p-loss': '3,3',
 };
 
