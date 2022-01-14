@@ -1,22 +1,15 @@
 # Bitsweeper
 
-## To-do
-
-- [ ]  Diff title color for ega
-
-
 **Nice to haves**
 
-- [ ] Sound: They are loud and grating! Using mine>explosion, thud/plant>flag, open>subtle chick. Add win sound.
+- [x] Sound: They are loud and grating! Using mine>explosion, thud/plant>flag, open>subtle chick. Add win sound.
 - [x] One more theme
 - [ ] Animation: Add particles when you open block
 - [ ] Animation: Flag placement
 - [ ] Add loader
----
-- [ ] Reduce sound file size. Convert to mp3?
 
 ## Bugs
-- [ ] 100vh is too much, causing spaceing beause of Safari's address bar floating above
+- [x] 100vh is too much, causing spaceing beause of Safari's address bar floating above
 - [ ] Don't flag mines on scroll
 - [ ] Random block sprites get set on clicking smiley and then again on first press
 - [ ] Switching tabs on mobile and returning to game disables further sound playing. Or putting phone on sleep. Do I need to re-import sound files? see examples on howlerjs site which work properly.

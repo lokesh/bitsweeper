@@ -76,7 +76,10 @@ import Number from '@/components/Number';
 import Sprite from '@/components/Sprite';
 import {
   DIFFICULTIES,
+  SFX_BUTTON,
+  SFX_MENU_CLOSE,
 } from '@/utils/constants';
+import { play } from '@/utils/sound';
 
 export default {
   name: 'SettingsModal',
@@ -104,14 +107,17 @@ export default {
 
   methods: {
     closeSettings() {
+      play(SFX_MENU_CLOSE);
       this.$store.commit('closeModal');
     },
     
     toggleDifficulty() {
+      play(SFX_BUTTON);
       this.$store.dispatch('toggleDifficulty');
     },
     
     toggleTheme() {
+      play(SFX_BUTTON);
       this.$store.dispatch('toggleTheme');
     },
   }

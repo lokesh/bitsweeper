@@ -5,14 +5,14 @@ export const DIFFICULTY_MEDIUM = 'medium';
 export const DIFFICULTY_HARD = 'hard';
 export const DIFFICULTIES = {
   [DIFFICULTY_EASY]: {
-    rows: 8,
-    cols: 6,
-    mines: 4,
+    rows: 7,
+    cols: 7,
+    mines: 6,
   },
   [DIFFICULTY_MEDIUM]: {
     rows: 12,
     cols: 8,
-    mines: 12,
+    mines: 1, // 12
   },
   [DIFFICULTY_HARD]: {
     rows: 24,
@@ -30,11 +30,15 @@ export const STATE_LOST = 'lost';
  * SOUND
  */
 
+export const SFX_BUTTON = 'button';
 export const SFX_EXPAND = 'expand';
 export const SFX_FLAG = 'flag';
-export const SFX_MINE = 'mine';
+export const SFX_LOSS = 'loss';
+export const SFX_MENU_OPEN = 'menuOpen';
+export const SFX_MENU_CLOSE = 'menuClose';
 export const SFX_OPEN = 'open';
 export const SFX_RESTART = 'start';
+export const SFX_WIN = 'win';
 
 /**
  * VISUALS

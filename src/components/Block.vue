@@ -43,6 +43,8 @@ export default {
     return {
       allowClick: true,
       pointerDown: false,
+      sprite: '',
+      backgroundPosition: '',
     };
   },
 
@@ -82,8 +84,21 @@ export default {
         }
       }
 
+      // If sprite is a block, we have multiple sprites for it. These are to
+      // add visual interest. 
+      // 
+      // When a new game is started, the block prop data changes, but we don't
+      // want to fetch a new random block sprite for the blocks. This makes the
+      // field do a little sutter. To resolve, we check if the sprite is the same
+      // type and if so, we don't call getSpritePosition but instead use a saved
+      // val of the sprite position.
+      if (sprite !== this.sprite) {
+        this.sprite = sprite;
+        this.backgroundPosition = getSpritePosition(sprite);
+      }
+
       return {
-        backgroundPosition: getSpritePosition(sprite),
+        backgroundPosition: this.backgroundPosition,
       }
     },
 

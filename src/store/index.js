@@ -8,16 +8,13 @@ import {
   STATE_LOST,
   STATE_READY,
   STATE_WON,
+  SFX_EXPAND,
+  SFX_LOSS,
+  SFX_WIN,
   THEMES,
-
 } from '@/utils/constants';
 import { getNeighbors } from '@/utils/index';
 import Block from '@/classes/Block';
-import {
-  SFX_EXPAND,
-  SFX_MINE,
-  SFX_RESTART,
-} from '@/utils/constants';
 import { play } from '@/utils/sound';
 
 export default createStore({
@@ -151,7 +148,7 @@ export default createStore({
     },    
 
     loseGame({ commit }) {
-      play(SFX_MINE);
+      play(SFX_LOSS);
       commit('setGameState', STATE_LOST);
     },
 
@@ -179,12 +176,18 @@ export default createStore({
 
       let neighbors = getNeighbors(block.row, block.col, state.field);
 
+      let playingSound = false;
+
       /*
         Expand outward. If neighbor has a 0 neighborsMinesCount than add it's
         neighbors to stack.
        */
       while (neighbors.length > 0) {
-        play(SFX_EXPAND);
+        if (!playingSound) {
+          play(SFX_EXPAND);
+        }
+        playingSound = true;
+
         let neighbor = neighbors.shift();
         
         if (neighbor.neighborMinesCount === 0
@@ -269,7 +272,7 @@ export default createStore({
     },
 
     winGame({ state, commit }) {
-      play(SFX_RESTART);
+      play(SFX_WIN);
       commit('setFlagCount', state.mines);
       commit('setGameState', STATE_WON);
     },

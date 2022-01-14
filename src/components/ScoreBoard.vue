@@ -37,7 +37,13 @@
 import { mapGetters, mapState } from 'vuex';
 import Number from '@/components/Number';
 import Sprite from '@/components/Sprite';
-import { MODAL_SETTINGS, STATE_LOST, STATE_WON, SFX_RESTART } from '@/utils/constants';
+import {
+  MODAL_SETTINGS,
+  STATE_LOST,
+  STATE_WON,
+  SFX_MENU_OPEN,
+  SFX_RESTART
+} from '@/utils/constants';
 import { play } from '@/utils/sound';
 import { getSpritePosition } from '@/utils/sprite';
 
@@ -83,6 +89,7 @@ export default {
 
   methods: {
     openMenu() {
+      play(SFX_MENU_OPEN);
       this.$store.commit('openModal', MODAL_SETTINGS);
     },
     resetGame() {
