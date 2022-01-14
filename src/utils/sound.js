@@ -48,7 +48,7 @@ export const preloadSounds = () => {
   });
 
   restart = new Howl({
-    src: ['/sound/restart2.wav'],
+    src: ['/sound/restart.wav'],
     volume: 0.5 * masterVol,
   });
 

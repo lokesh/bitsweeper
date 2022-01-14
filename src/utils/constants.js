@@ -12,7 +12,7 @@ export const DIFFICULTIES = {
   [DIFFICULTY_MEDIUM]: {
     rows: 12,
     cols: 8,
-    mines: 1, // 12
+    mines: 12, // 12
   },
   [DIFFICULTY_HARD]: {
     rows: 24,

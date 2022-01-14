@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import {
-  DIFFICULTY_MEDIUM,
+  DIFFICULTY_EASY,
   THEME_EGA,
 } from '@/utils/constants';
 import App from './App.vue'
@@ -11,7 +11,7 @@ const app = createApp(App);
 
 
 // Configure default state
-store.dispatch('changeDifficulty', DIFFICULTY_MEDIUM);
+store.dispatch('changeDifficulty', DIFFICULTY_EASY);
 store.dispatch('changeTheme', THEME_EGA);
 
 app.use(store);
