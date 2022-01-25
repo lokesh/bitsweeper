@@ -1,18 +1,22 @@
 <template>
   <div class="score-board">
-    <div
-      class="g-sprite menu-button"
-      aria-role="button"
-      tabindex="0"
-      :style="menuButtonStyle"
-      @click="openMenu"
-      @keyup.enter.space="openMenu"
-    />    
+    <div class="left-section">
+      <div
+        class="g-sprite menu-button"
+        aria-role="button"
+        tabindex="0"
+        :style="menuButtonStyle"
+        @click="openMenu"
+        @keyup.enter.space="openMenu"
+      />    
+    </div>
+
     <div class="mine-count">
       <div class="g-sprite mine-icon" />    
       <number :value="remainingMinesCount" />
     </div>
-    <div class="player-corner">
+
+    <div class="right-section">
       <sprite
         v-if="isGameover"
         class="arrow"
@@ -107,6 +111,16 @@ export default {
   gap: 36px;
 }
 
+.left-section {
+  flex: 0 0 96px;
+}
+
+.right-section {
+  display: flex;
+  flex: 0 0 96px;
+  justify-content: flex-end;
+}
+
 .menu-button {
   width: var(--block-size);
   height: var(--block-size);
@@ -124,10 +138,6 @@ export default {
   width: calc(4px * var(--pixel-size));
   height:  calc(6px * var(--pixel-size));
   background-position: -352px 0;
-}
-
-.player-corner {
-  display: flex;
 }
 
 .arrow {
