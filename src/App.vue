@@ -39,6 +39,19 @@ export default {
     },
   },
 
+  watch: {
+    modal(val, oldVal) {
+      // If modal still open, or modal still closed, don't do anything
+      if (!!val === !!oldVal) return;
+
+      if (val) {
+        this.disableScrolling();
+      } else {
+        this.enableScrolling();
+      }
+    },
+  },
+
   mounted() {
     preloadSounds();
     document.addEventListener('visibilitychange', this.onVisibilityChange, false);
@@ -49,6 +62,14 @@ export default {
   },
 
   methods: {
+    disableScrolling() {
+      document.body.classList.add('modal-open');
+    },
+
+    enableScrolling() {
+      document.body.classList.remove('modal-open');
+    },
+
     // Sounds would not play after switching tabs in iOS or putting device to sleep 
     // and revisiting the open tab. Preloading the files again seems to resolve it. 
     onVisibilityChange() {

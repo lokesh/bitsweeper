@@ -70,7 +70,7 @@
 
 .theme-cga {
   --color-bg:rgb(0, 0, 0);
-  --color-overlay: rgba(0, 0, 0, 0.8);
+  --color-overlay: rgba(0, 0, 0, 0.9);
 }
 
 .theme-cga .g-sprite {
@@ -79,7 +79,7 @@
 
 .theme-muted {
   --color-bg: rgb(25, 25, 25);
-  --color-overlay: rgba(25, 25, 25, 0.8);
+  --color-overlay: rgba(25, 25, 25, 0.93);
 }
 
 .theme-muted .g-sprite {
@@ -107,6 +107,10 @@
   box-sizing: border-box;
 }
 
+html {
+  background: var(--color-bg);
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -114,6 +118,10 @@ body {
   July 2020. */
   /* touch-action: manipulation;*/
   /* ouch-action: none;*/
+}
+
+body.modal-open {
+  overyflow-y: hidden;
 }
 
 .app {

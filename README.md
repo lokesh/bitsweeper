@@ -8,8 +8,8 @@
 
 ## Bugs
 - [x] Topbar layout shift on completion when arrow is made visible
-- [ ] Adjust opacities
-- [ ] Prevent scrolling on settings screen
+- [x] Adjust opacities
+- [x] Prevent scrolling on settings screen
 - [ ] Default 95vh is causing scrolling even on beginner level. Use simpler offset from top calc-ed from row count?
 - [ ] Don't flag mines on scroll
 - [ ] Random block sprites get set on clicking smiley and then again on first press

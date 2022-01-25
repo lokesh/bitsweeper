@@ -43,5 +43,6 @@ export default {
   flex: 1 0 auto;
   display: flex;
   align-items: center;
+  margin-bottom: 16px;
 }
 </style>
