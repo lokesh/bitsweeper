@@ -23,7 +23,7 @@ import Block from '@/components/Block';
 import { STATE_LOST, STATE_WON } from '@/utils/constants';
 
 export default {
-  name: 'MineField',
+  name: 'Minefield',
   
   components: {
     Block,

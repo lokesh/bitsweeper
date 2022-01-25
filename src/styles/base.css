@@ -41,45 +41,20 @@
 /* THEMES */
 /* ------ */
 
-.theme-1bit {
-  --color-bg: #271c31;
-  --color-overlay: rgba(39, 28, 49, 0.95);
-}
-
 .theme-1bit .g-sprite {
   background-image: url('../assets/sprites-1bit.png');
-}
-
-.theme-contrast {
-  --color-bg: #020408;
-  --color-overlay: rgba(2, 4, 8, 0.8);
 }
 
 .theme-contrast .g-sprite {
   background-image: url('../assets/sprites-contrast.png');
 }
 
-.theme-ega {
-  --color-bg:rgb(0, 0, 0);
-  --color-overlay: rgba(0, 0, 0, 0.8);
-}
-
-.theme-ega .g-sprite {
-  background-image: url('../assets/sprites-ega.png');
-}
-
-.theme-cga {
-  --color-bg:rgb(0, 0, 0);
-  --color-overlay: rgba(0, 0, 0, 0.9);
-}
-
 .theme-cga .g-sprite {
   background-image: url('../assets/sprites-cga.png');
 }
 
-.theme-muted {
-  --color-bg: rgb(25, 25, 25);
-  --color-overlay: rgba(25, 25, 25, 0.93);
+.theme-ega .g-sprite {
+  background-image: url('../assets/sprites-ega.png');
 }
 
 .theme-muted .g-sprite {

@@ -12,7 +12,7 @@
 import { mapState } from 'vuex';
 import GameBoard from '@/components/GameBoard.vue'
 import SettingsModal from '@/components/SettingsModal';
-import { MODAL_SETTINGS } from '@/utils/constants';
+import { MODAL_SETTINGS, THEME_CONFIGS } from '@/utils/constants';
 import { preloadSounds } from '@/utils/sound';
 
 export default {
@@ -49,6 +49,15 @@ export default {
       } else {
         this.enableScrolling();
       }
+    },
+
+    theme: {
+      handler: function (val) {
+        document.documentElement.style.setProperty('--color-bg', THEME_CONFIGS[val].bg);
+        document.documentElement.style.setProperty('--color-overlay', THEME_CONFIGS[val].overlay);
+      },
+      immediate: true,
+      
     },
   },
 
@@ -87,6 +96,6 @@ export default {
 
 <style scoped>
 .app {
-  min-height: 100vh;
+/*  min-height: 100vh;*/
 }
 </style>

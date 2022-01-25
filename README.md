@@ -1,8 +1,8 @@
 # Bitsweeper
 
 **Nice to haves**
-- [ ] Add note about long press on mobile and right click
 - [ ] Animation: Add particles when you open block
+- [ ] Add note about long press on mobile and right click
 - [ ] Animation: Flag placement
 - [ ] Add loader
 
@@ -10,11 +10,11 @@
 - [x] Topbar layout shift on completion when arrow is made visible
 - [x] Adjust opacities
 - [x] Prevent scrolling on settings screen
-- [ ] Default 95vh is causing scrolling even on beginner level. Use simpler offset from top calc-ed from row count?
-- [ ] Don't flag mines on scroll
-- [ ] Random block sprites get set on clicking smiley and then again on first press
+- [x] Default 95vh is causing scrolling even on beginner level. Use simpler offset from top calc-ed from row count?
 - [ ] Switching tabs on mobile and returning to game disables further sound playing. Or putting phone on sleep. Do I need to re-import sound files? see examples on howlerjs site which work properly.
 The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu
+- [ ] Don't flag mines on scroll
+- [ ] Random block sprites get set on clicking smiley and then again on first press
 
 ## Lessons
 

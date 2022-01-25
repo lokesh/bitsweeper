@@ -53,10 +53,33 @@ export const THEME_CGA = 'cga';
 export const THEME_EGA = 'ega';
 export const THEME_MUTED = 'muted';
 
-export const THEMES = [
+export const THEME_LIST = [
   THEME_1BIT,
   THEME_CONTRAST,
   THEME_CGA,  
   THEME_EGA,
   THEME_MUTED,
 ]
+
+export const THEME_CONFIGS = {
+  [THEME_1BIT]: {
+    bg: '#271c31',
+    overlay: 'rgba(39, 28, 49, 0.95)',
+  },
+  [THEME_CONTRAST]: {
+    bg: '#020408',
+    overlay: 'rgba(2, 4, 8, 0.8)',
+  },
+  [THEME_CGA]: {
+    bg: 'rgb(0, 0, 0)',
+    overlay: 'rgba(0, 0, 0, 0.9)',
+  },
+  [THEME_EGA]: {
+    bg: 'rgb(0, 0, 0)',
+    overlay: 'rgba(0, 0, 0, 0.8)',
+  },
+  [THEME_MUTED]: {
+    bg: 'rgb(25, 25, 25)',
+    overlay: 'rgba(25, 25, 25, 0.93)',
+  },
+}

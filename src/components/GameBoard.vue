@@ -1,18 +1,22 @@
 <template>
   <div class="game-board">
     <score-board class="score-board" />
-    <mine-field class="mine-field" />
+    <minefield
+      class="minefield"
+      :style="minefieldStyle"
+    />
   </div>
 </template>
 
 <script>
-import MineField from '@/components/MineField';
+import { mapState } from 'vuex';
+import Minefield from '@/components/Minefield';
 import ScoreBoard from '@/components/ScoreBoard';
 
 export default {
   name: 'GameBoard',
   components: {
-    MineField,
+    Minefield,
     ScoreBoard,
   },
   
@@ -22,6 +26,19 @@ export default {
 
   created() {
      this.$store.dispatch('resetGame');
+  },
+
+  computed: {
+    ...mapState([
+      'rows',
+    ]),
+
+    // Shift small minefields down away from the scoreboard.
+    minefieldStyle(){
+      return {
+        marginTop: `${Math.max(0, 12 - this.rows) * 12}px`,
+      }
+    }
   }
 }
 </script>
@@ -31,7 +48,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 90vh;
+/*  min-height: 90vh;*/
   user-select: none;
 }
 
@@ -39,7 +56,7 @@ export default {
   width: calc(var(--block-size) * var(--cols));
 }
 
-.mine-field {
+.minefield {
   flex: 1 0 auto;
   display: flex;
   align-items: center;

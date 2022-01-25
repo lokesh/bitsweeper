@@ -11,7 +11,7 @@ import {
   SFX_EXPAND,
   SFX_LOSS,
   SFX_WIN,
-  THEMES,
+  THEME_LIST,
 } from '@/utils/constants';
 import { getNeighbors } from '@/utils/index';
 import Block from '@/classes/Block';
@@ -244,9 +244,9 @@ export default createStore({
     },
 
     toggleTheme({ state, dispatch }) {
-      const index = THEMES.indexOf(state.theme);
-      const newIndex = (index + 1) % THEMES.length;
-      dispatch('changeTheme', THEMES[newIndex]);
+      const index = THEME_LIST.indexOf(state.theme);
+      const newIndex = (index + 1) % THEME_LIST.length;
+      dispatch('changeTheme', THEME_LIST[newIndex]);
     },
 
     resetGame({ state, commit }) {
