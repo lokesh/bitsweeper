@@ -6,7 +6,7 @@
       class="g-sprite digit"
       :style="getStyleForDigit(Number(digit))"
       role="img"
-      aria-label="digit"
+      :aria-label="digit"
     >
     </div>
   </div>

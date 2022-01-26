@@ -21,7 +21,7 @@
   /* Each sprite pixel is displayed at 4x */
   --pixel-size: 4;
 
-  --spritesheet-width: 120px;
+  --spritesheet-width: 156px;
   --spritesheet-height: 120px;
 
   --spritesheet-render-width: calc(var(--spritesheet-width) * var(--pixel-size));
