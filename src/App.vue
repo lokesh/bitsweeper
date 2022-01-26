@@ -5,11 +5,13 @@
   >
     <game-board />
     <settings-modal v-if="modal === MODAL_SETTINGS" />
+    <particles class="particles" />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import Particles from '@/components/Particles.vue'
 import GameBoard from '@/components/GameBoard.vue'
 import SettingsModal from '@/components/SettingsModal';
 import { MODAL_SETTINGS, THEME_CONFIGS } from '@/utils/constants';
@@ -18,6 +20,7 @@ import { preloadSounds } from '@/utils/sound';
 export default {
   name: 'App',
   components: {
+    Particles,
     GameBoard,
     SettingsModal,
   },
@@ -95,7 +98,14 @@ export default {
 </style>
 
 <style scoped>
-.app {
-/*  min-height: 100vh;*/
+.particles {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
 }
 </style>
