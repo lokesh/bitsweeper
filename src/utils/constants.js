@@ -44,6 +44,8 @@ export const SFX_WIN = 'win';
  * VISUALS
  */
 
+export const BLOCK_SIZE = 48;
+
 // Each image pixel is rendered 4x
 export const PIXEL_SIZE = 4;
 
@@ -63,22 +65,27 @@ export const THEME_LIST = [
 
 export const THEME_CONFIGS = {
   [THEME_1BIT]: {
+    blockColor: '#d2fddb',
     bg: '#271c31',
     overlay: 'rgba(39, 28, 49, 0.95)',
   },
   [THEME_CONTRAST]: {
+    blockColor: '#5e5750',
     bg: '#020408',
     overlay: 'rgba(2, 4, 8, 0.8)',
   },
   [THEME_CGA]: {
+    blockColor: '#60fefd',
     bg: 'rgb(0, 0, 0)',
     overlay: 'rgba(0, 0, 0, 0.9)',
   },
   [THEME_EGA]: {
+    blockColor: '#5084e2',
     bg: 'rgb(0, 0, 0)',
     overlay: 'rgba(0, 0, 0, 0.8)',
   },
   [THEME_MUTED]: {
+    blockColor: '#e3e2d8',
     bg: 'rgb(25, 25, 25)',
     overlay: 'rgba(25, 25, 25, 0.93)',
   },

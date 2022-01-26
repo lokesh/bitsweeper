@@ -112,6 +112,16 @@ export default {
     },
   },
 
+  watch: {
+    "block.isOpen"(val, oldVal) {
+      // Did block just open up?
+      if (val && !oldVal && !this.block.hasMine) {
+        // console.log(this.block.row, this.block.col);
+        this.emitter.emit('open', {row: this.block.row, col: this.block.col});  
+      }
+    },
+  },
+
   mounted() {
     ['mousedown', 'touchstart'].forEach(e => this.$el.addEventListener(e, this.onPointerdown));
   },

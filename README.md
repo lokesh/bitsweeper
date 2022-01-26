@@ -1,10 +1,12 @@
 # Bitsweeper
 
 **Nice to haves**
-- [ ] Animation: Add particles when you open block
+- [x] Animation: Add particles when you open block
 - [ ] Add note about long press on mobile and right click
+- [ ] Add favicon
 - [ ] Animation: Flag placement
 - [ ] Add loader
+- [ ] Remove margin/gap from blocks? have it be part of the target
 
 ## Bugs
 - [x] Topbar layout shift on completion when arrow is made visible
@@ -16,7 +18,18 @@ The AudioContext was not allowed to start. It must be resumed (or created) after
 - [ ] Don't flag mines on scroll
 - [ ] Random block sprites get set on clicking smiley and then again on first press
 
+## Architecture
+
+**JS Framework**
+- Vue 3.0 - First time using. Only a small hiccup as I had to translate the longpress directive into new format, easy enough though.
+- Event Bus: Using Mitt library for event bus as attaching on/off handles on Vue Class is no longer feasible. Limited to usage with particle system.
+
+**Visuals**
+- Particles: Canvas element overlayed on top of app for particle effects.
+- Custom font: Using a component to display custom pixel font.
+
 ## Lessons
+
 
 - **Project Mgmt**
   - The README.md worked well for tracking to-dos and taking notes.

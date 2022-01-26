@@ -29,10 +29,6 @@ export default {
     Block,
   },
 
-  props: {
-    msg: String
-  },
-
   data() {
     return {
       isShaking: false,
@@ -84,13 +80,38 @@ export default {
         }, 300);
       }
     },
+
+    rows() {
+      this.$nextTick(() => {
+        this.saveMinefieldCoords();
+      });
+    },
+
+    cols() {
+      this.$nextTick(() => {
+        this.saveMinefieldCoords();
+      });
+    },
   },
 
   mounted() {
+    this.saveMinefieldCoords();
+
     // Disables default right-click behavior which pulls up the context menu.
     this.$el.addEventListener('contextmenu', function(e){
         e.preventDefault();
     }, false);
+
+  },
+
+  methods: {
+    saveMinefieldCoords() {
+      const rect = this.$el.getBoundingClientRect();
+      this.$store.commit('setMinefieldCoords', {
+        x: rect.left + window.scrollX,
+        y: rect.top + window.scrollY,
+      })
+    },
   },
 
 }

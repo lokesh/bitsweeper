@@ -20,7 +20,9 @@ import { play } from '@/utils/sound';
 export default createStore({
   state: {
     difficulty: null,
-    theme: null,
+    theme: null, // Theme name
+
+    minefieldCoords: null, // { x: 100, y: 24 }
 
     rows: null,
     cols: null,
@@ -113,6 +115,11 @@ export default createStore({
 
     setGameState(state, val) {
       state.gameState = val;
+    },
+
+    setMinefieldCoords(state, val) {
+      console.log(val);
+      state.minefieldCoords = val;
     },
 
     setMines(state, val) {

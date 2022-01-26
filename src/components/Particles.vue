@@ -5,7 +5,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Particle from '@/classes/Particle';
+import { BLOCK_SIZE, THEME_CONFIGS } from '@/utils/constants';
+
+const NUM_ON_OPEN = 24;
+const MAX = 200;
 
 export default {
   name: 'FXCanvas',
@@ -22,20 +27,37 @@ export default {
   },
 
   computed: {
-
+    ...mapState([
+      'minefieldCoords',
+      'theme',
+    ]),
   },
   
   mounted() {
     this.initCanvas();
     this.drawLoop();
 
-    document.addEventListener( 'mousedown', this.onMouseDown, false);
+    this.emitter.on('open', coords => {
+      this.explode(coords.row, coords.col);
+    });
   },
 
   methods: {
+    explode(row, col) {
+      let reduceCount = Math.floor(this.particles.length / 10);
+      for (let i = 0; i < NUM_ON_OPEN - reduceCount; i++) {
+        if (this.particles.length < MAX) {
+          const halfBlock = BLOCK_SIZE / 2;
+          const x = this.minefieldCoords.x + (col * BLOCK_SIZE) + halfBlock - window.scrollX;
+          const y = this.minefieldCoords.y + (row * BLOCK_SIZE) + halfBlock - window.scrollY;
+          const color = THEME_CONFIGS[this.theme].blockColor;
+          this.particles.push(new Particle(x, y, color));  
+        }
+      }
+    },
+
     drawLoop() {
       this.ctx.clearRect(0,0, this.screenWidth, this.screenHeight);
-
       this.particles = this.particles.filter(particle => {
         return particle.lifespan >= 0;
       });
@@ -63,12 +85,6 @@ export default {
 
       // Normalize coordinate system to use css pixels.
       this.ctx.scale(scale, scale);
-    },
-
-    onMouseDown(e) {
-      for ( let i = 0; i < 50; i++) {
-        this.particles.push(new Particle(e.clientX, e.clientY));  
-      }
     },
   },
 
