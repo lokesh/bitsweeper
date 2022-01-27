@@ -2,6 +2,7 @@
   <div class="overlay">
     <div class="content">
       <sprite
+        v-if="true"
         class="logo"
         :x="48"
         :y="12"

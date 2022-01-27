@@ -27,7 +27,14 @@ The AudioContext was not allowed to start. It must be resumed (or created) after
 - Particles: Canvas element overlayed on top of app for particle effects.
 - Custom font: Using a component to display custom pixel font.
 
-## Lessons
+## What did I learn?
+
+timeline
+sound
+visuals
+collecting feedback
+gameplay
+mobile
 
 
 - **Project Mgmt**

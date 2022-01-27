@@ -119,7 +119,6 @@ export default createStore({
     },
 
     setMinefieldCoords(state, val) {
-      console.log(val);
       state.minefieldCoords = val;
     },
 

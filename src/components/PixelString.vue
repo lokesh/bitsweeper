@@ -29,12 +29,16 @@ export default {
 
   methods: {
     getStyleForLetter(letter) {
-      let letterIndex = letter.toLowerCase().charCodeAt(0) - 97;
+      let letterCode = letter.toLowerCase().charCodeAt(0) - 97;
+      let letterIndex = letterCode;
       
-      // Space has a letter index of -65
-      letterIndex = (letterIndex < 0) ? 26 : letterIndex;
-
-      let leftOffset = -192 - (letterIndex * 16);
+      if (letterCode === -65) { // Space
+        letterIndex = 27;
+      } else if (letterCode === -39) { // Colon
+        letterIndex = 26;
+      }       
+      
+      const leftOffset = -192 - (letterIndex * 16);
 
       return {
         backgroundPosition: `${leftOffset}px -24px`,

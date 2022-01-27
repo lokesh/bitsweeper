@@ -3,10 +3,10 @@
     <div class="content">
       <sprite
         class="logo"
-        :x="48"
-        :y="12"
-        :width="43"
-        :height="8"
+        :x="36"
+        :y="72"
+        :width="88"
+        :height="23"
       />
 
       <sprite
@@ -22,14 +22,16 @@
       />
 
       <div class="help">
-        <pixel-string class="help-item" value="Controls" style="padding-bottom: 12px; border-bottom: 4px solid white;" />
+       <!--  <pixel-string class="help-item" value="Controls" style="padding-bottom: 12px; border-bottom: 4px solid white;" /> -->
         <template v-if="hasMouse">
-          <pixel-string class="help-item" value="Click to open" />
-          <pixel-string class="help-item" value="Right click to flag" />  
+          <!-- <pixel-string class="help-item" value="Click to open" /> -->
+          <pixel-string class="help-item" value="Tip:Right click" />  
+          <pixel-string class="help-item" value="to add a flag" />  
         </template>
         <template v-else>
-          <pixel-string class="help-item" value="Tap to open" />
-          <pixel-string class="help-item" value="Long press to flag" />  
+          <!-- <pixel-string class="help-item" value="Tap to open" /> -->
+          <pixel-string class="help-item" value="Tip:Long press" />  
+          <pixel-string class="help-item" value="to add a flag" />  
         </template>
       </div>
 
