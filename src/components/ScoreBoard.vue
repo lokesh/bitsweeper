@@ -9,7 +9,6 @@
         @click="openMenu"
         @keyup.enter.space="openMenu"
       />  
-      <string value="Hi Sarah" />  
     </div>
 
     <div class="mine-count">
@@ -41,7 +40,6 @@
 <script>
 import { mapGetters, mapState } from 'vuex';
 import Number from '@/components/Number';
-import String from '@/components/String';
 import Sprite from '@/components/Sprite';
 import {
   MODAL_SETTINGS,
@@ -59,7 +57,6 @@ export default {
   components: {
     Number,
     Sprite,
-    String,
   },
 
   computed: {

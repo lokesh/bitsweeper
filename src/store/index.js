@@ -33,7 +33,7 @@ export default createStore({
     
     gameState: STATE_READY,
 
-    modal: null, //'settings',
+    modal: 'settings', //'settings',
   },
   mutations: {
     addFlag(state, val) {

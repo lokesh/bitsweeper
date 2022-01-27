@@ -53,17 +53,21 @@
       </div>
 
       <div class="bottom-row">
-        <sprite
-          class="back"
-          :x="48"
-          :y="48"
-          :width="20"
-          :height="5"
+        <div
+          class="back-button"
           aria-role="button"
           tabindex="0"
           @click="closeSettings"
           @keyup.enter.space="closeSettings"        
-        />
+        >
+          <sprite
+            :x="48"
+            :y="48"
+            :width="5"
+            :height="5"
+          />
+          <pixel-string value="Back" />  
+        </div>
       </div>
 
     </div>
@@ -74,6 +78,7 @@
 import { mapState } from 'vuex';
 import Number from '@/components/Number';
 import Sprite from '@/components/Sprite';
+import PixelString from '@/components/PixelString';
 import {
   DIFFICULTIES,
   SFX_BUTTON,
@@ -86,6 +91,7 @@ export default {
 
   components: {
     Number,
+    PixelString,
     Sprite,
   },
 
@@ -169,7 +175,8 @@ export default {
   width: 180px;
 }
 
-.back {
+.back-button {
   cursor: pointer;
+  display: flex;
 }
 </style>
