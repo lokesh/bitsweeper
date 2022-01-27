@@ -4,6 +4,7 @@ import {
   DIFFICULTY_EASY,
   DIFFICULTY_MEDIUM,
   DIFFICULTY_HARD,
+  MODAL_TITLE,
   STATE_ACTIVE,
   STATE_LOST,
   STATE_READY,
@@ -33,7 +34,7 @@ export default createStore({
     
     gameState: STATE_READY,
 
-    modal: 'settings', //'settings',
+    modal: MODAL_TITLE,
   },
   mutations: {
     addFlag(state, val) {

@@ -1,4 +1,5 @@
 export const MODAL_SETTINGS = 'settings';
+export const MODAL_TITLE = 'title';
 
 export const DIFFICULTY_EASY = 'easy';
 export const DIFFICULTY_MEDIUM = 'medium';

@@ -4,7 +4,10 @@
     :class="appClass"
   >
     <game-board />
+    
     <settings-modal v-if="modal === MODAL_SETTINGS" />
+    <title-modal v-if="modal === MODAL_TITLE" />
+    
     <particles class="particles" />
   </div>
 </template>
@@ -14,7 +17,12 @@ import { mapState } from 'vuex';
 import Particles from '@/components/Particles.vue'
 import GameBoard from '@/components/GameBoard.vue'
 import SettingsModal from '@/components/SettingsModal';
-import { MODAL_SETTINGS, THEME_CONFIGS } from '@/utils/constants';
+import TitleModal from '@/components/TitleModal';
+import {
+  MODAL_SETTINGS,
+  MODAL_TITLE,
+  THEME_CONFIGS
+} from '@/utils/constants';
 import { preloadSounds } from '@/utils/sound';
 
 export default {
@@ -23,11 +31,13 @@ export default {
     Particles,
     GameBoard,
     SettingsModal,
+    TitleModal,
   },
 
   data() {
     return {
       MODAL_SETTINGS,
+      MODAL_TITLE,
     };
   },
 

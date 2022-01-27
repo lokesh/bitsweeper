@@ -2,21 +2,20 @@
 
 **Nice to haves**
 - [x] Animation: Add particles when you open block
-- [ ] Add note about long press on mobile and right click
+- [x] Add note about long press on mobile and right click
 - [ ] Add favicon
 - [ ] Animation: Flag placement
 - [ ] Add loader
-- [ ] Remove margin/gap from blocks? have it be part of the target
 
 ## Bugs
 - [x] Topbar layout shift on completion when arrow is made visible
 - [x] Adjust opacities
 - [x] Prevent scrolling on settings screen
 - [x] Default 95vh is causing scrolling even on beginner level. Use simpler offset from top calc-ed from row count?
+- [x] Random block sprites get set on clicking smiley and then again on first press
 - [ ] Switching tabs on mobile and returning to game disables further sound playing. Or putting phone on sleep. Do I need to re-import sound files? see examples on howlerjs site which work properly.
 The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu
 - [ ] Don't flag mines on scroll
-- [ ] Random block sprites get set on clicking smiley and then again on first press
 
 ## Architecture
 
