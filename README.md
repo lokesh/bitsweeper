@@ -3,7 +3,7 @@
 **Nice to haves**
 - [x] Animation: Add particles when you open block
 - [x] Add note about long press on mobile and right click
-- [ ] Add favicon
+- [x] Add favicon
 - [ ] Animation: Flag placement
 - [ ] Add loader
 
