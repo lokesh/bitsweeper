@@ -61,17 +61,12 @@ export default {
 
     flag(row, col) {
       const {x , y} = this.getCoordsFromRowCol(row, col);
-      const color = THEME_CONFIGS[this.theme].blockColor;
-
-      // 1. Explode
-      // for (let i = 0; i < 100; i++) {
-      //   this.particles.push(new Particle({x, y, color: '#ffffff', gravity: 0}));  
-      // }
-      
+      const color = THEME_CONFIGS[this.theme].flagColor;
       
       const c = {
         x,
         y,
+        color,
         gravity: 0,
         lifespan: 25,
         drag: 0.9,
@@ -80,6 +75,7 @@ export default {
       const dist1 = 10;
       const dist2 = 7.5;
 
+      // Emit particles in circle
       this.particles.push(new Particle({...c, velX: 0, velY: -dist1,}));
       this.particles.push(new Particle({...c, velX: dist1, velY: 0,}));  
       this.particles.push(new Particle({...c, velX: 0, velY: dist1,}));
