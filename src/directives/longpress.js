@@ -26,6 +26,8 @@ export default {
       }
     }
 
+    document.addEventListener('scroll', cancel, false);
+
     ['mousedown', 'touchstart'].forEach(e => el.addEventListener(e, start));
     ['click', 'mouseout', 'touchend', 'touchcancel'].forEach(e => el.addEventListener(e, cancel));    
   }

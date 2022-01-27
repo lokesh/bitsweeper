@@ -113,10 +113,14 @@ export default {
   },
 
   watch: {
+    "block.flagged"(val, oldVal) {
+      if (val && !oldVal) {
+        this.emitter.emit('flag', {row: this.block.row, col: this.block.col});  
+      }
+    },
     "block.isOpen"(val, oldVal) {
       // Did block just open up?
       if (val && !oldVal && !this.block.hasMine) {
-        // console.log(this.block.row, this.block.col);
         this.emitter.emit('open', {row: this.block.row, col: this.block.col});  
       }
     },

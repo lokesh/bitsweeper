@@ -37,6 +37,10 @@ export default {
     this.initCanvas();
     this.drawLoop();
 
+    this.emitter.on('flag', coords => {
+      this.flag(coords.row, coords.col);
+    });
+
     this.emitter.on('open', coords => {
       this.explode(coords.row, coords.col);
     });
@@ -45,14 +49,53 @@ export default {
   methods: {
     explode(row, col) {
       let reduceCount = Math.floor(this.particles.length / 10);
+      const {x, y} = this.getCoordsFromRowCol(row, col);
+      const color = THEME_CONFIGS[this.theme].blockColor;
+
       for (let i = 0; i < NUM_ON_OPEN - reduceCount; i++) {
         if (this.particles.length < MAX) {
-          const halfBlock = BLOCK_SIZE / 2;
-          const x = this.minefieldCoords.x + (col * BLOCK_SIZE) + halfBlock - window.scrollX;
-          const y = this.minefieldCoords.y + (row * BLOCK_SIZE) + halfBlock - window.scrollY;
-          const color = THEME_CONFIGS[this.theme].blockColor;
-          this.particles.push(new Particle(x, y, color));  
+          this.particles.push(new Particle({x, y, color}));  
         }
+      }
+    },
+
+    flag(row, col) {
+      const {x , y} = this.getCoordsFromRowCol(row, col);
+      const color = THEME_CONFIGS[this.theme].blockColor;
+
+      // 1. Explode
+      // for (let i = 0; i < 100; i++) {
+      //   this.particles.push(new Particle({x, y, color: '#ffffff', gravity: 0}));  
+      // }
+      
+      
+      const c = {
+        x,
+        y,
+        gravity: 0,
+        lifespan: 25,
+        drag: 0.9,
+      }
+
+      const dist1 = 10;
+      const dist2 = 7.5;
+
+      this.particles.push(new Particle({...c, velX: 0, velY: -dist1,}));
+      this.particles.push(new Particle({...c, velX: dist1, velY: 0,}));  
+      this.particles.push(new Particle({...c, velX: 0, velY: dist1,}));
+      this.particles.push(new Particle({...c, velX: -dist1, velY: 0,}));  
+      
+      this.particles.push(new Particle({...c, velX: dist2, velY: -dist2,}));
+      this.particles.push(new Particle({...c, velX: dist2, velY: dist2,}));  
+      this.particles.push(new Particle({...c, velX: -dist2, velY: dist2,}));
+      this.particles.push(new Particle({...c, velX: -dist2, velY: -dist2,}));  
+    },
+
+    getCoordsFromRowCol(row, col) {
+      const halfBlock = BLOCK_SIZE / 2;
+      return {
+        x: this.minefieldCoords.x + (col * BLOCK_SIZE) + halfBlock - window.scrollX,
+        y: this.minefieldCoords.y + (row * BLOCK_SIZE) + halfBlock - window.scrollY,
       }
     },
 
