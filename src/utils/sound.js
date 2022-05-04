@@ -21,49 +21,53 @@ let restart;
 let menuOpen, menuClose;
 let button;
 
+const url = (process.env.NODE_ENV === 'development')
+  ? 'http://localhost:8080/'
+  : process.env.BASE_URL;
+
 export const preloadSounds = () => {
   flag = new Howl({
-    src: ['/sound/flag.wav'], // flag 1 or 3 
+    src: [`${url}/sound/flag.wav`], // flag 1 or 3 
     volume: 0.5 * masterVol,
   });
 
   loss = new Howl({
-    src: ['/sound/loss.wav'],
+    src: [`${url}/sound/loss.wav`],
     volume: 0.5 * masterVol,
   });
 
   win = new Howl({
-    src: ['/sound/win.wav'],
+    src: [`${url}/sound/win.wav`],
     volume: 0.6 * masterVol,
   });
 
   open = new Howl({
-    src: ['/sound/open.wav'],
+    src: [`${url}/sound/open.wav`],
     volume: 1.0 * masterVol,
   });
 
   expand = new Howl({
-    src: ['/sound/expand.wav'],
+    src: [`${url}/sound/expand.wav`],
     volume: 0.6 * masterVol,
   });
 
   restart = new Howl({
-    src: ['/sound/restart.wav'],
+    src: [`${url}/sound/restart.wav`],
     volume: 0.5 * masterVol,
   });
 
   menuOpen = new Howl({
-    src: ['/sound/menu-open.wav'],
+    src: [`${url}/sound/menu-open.wav`],
     volume: 0.9 * masterVol,
   });
 
   menuClose= new Howl({
-    src: ['/sound/menu-close.wav'],
+    src: [`${url}/sound/menu-close.wav`],
     volume: 0.9 * masterVol,
   });
 
   button = new Howl({
-    src: ['/sound/button.wav'],
+    src: [`${url}/sound/button.wav`],
     volume: 0.9 * masterVol,
   });
 
