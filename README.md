@@ -4,7 +4,7 @@
 - [x] Animation: Add particles when you open block
 - [x] Add note about long press on mobile and right click
 - [x] Add favicon
-- [ ] Animation: Flag placement
+- [x] Animation: Flag placement
 - [ ] Add loader
 
 ## Bugs
