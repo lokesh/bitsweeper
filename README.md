@@ -1,5 +1,10 @@
 # Bitsweeper
 
+## Development
+
+- Downgrade node: `nvm use v16.13.0`
+- To deploy: duplicate `.env.example` and rename `.env` and populate fields
+
 **Nice to haves**
 - [x] Animation: Add particles when you open block
 - [x] Add note about long press on mobile and right click
